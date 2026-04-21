@@ -1,0 +1,69 @@
+:root {
+  --color-ink-900: #e7edf9;
+  --color-ink-700: #c0cadf;
+  --color-ink-500: #8e98b1;
+  --color-line: rgba(226, 235, 255, 0.12);
+  --color-paper: rgba(11, 19, 36, 0.62);
+  --color-paper-strong: rgba(12, 21, 39, 0.82);
+  --color-primary: #79b8ff;
+  --color-primary-soft: #f7b36a;
+  --color-background: #020611;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-ink-900);
+  background: var(--color-background);
+  line-height: 1.6;
+  font-family:
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'Noto Sans SC',
+    sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(5, 9, 21, 0.3), rgba(4, 8, 16, 0.58));
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  padding: 0;
+}

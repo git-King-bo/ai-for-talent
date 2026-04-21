@@ -1,0 +1,335 @@
+[
+  {
+    "id": "talent-zhang-linfeng",
+    "roleType": "founder",
+    "name": "张林峰",
+    "university": "深势科技",
+    "position": "联合创始人、首席科学家",
+    "title": "联合创始人、首席科学家",
+    "organization": "深势科技",
+    "avatar": "/images/ai-for-talent/zhang-linfeng.jpg",
+    "location": "北京市",
+    "matchScore": 97,
+    "field": "AI for Science / 分子模拟",
+    "investmentFields": ["AI for Science", "分子模拟", "AI+新药研发"],
+    "investmentStages": ["B轮", "产业合作", "生态共建"],
+    "investmentStyle": "科研驱动、开源优先、重长期产业协同",
+    "educationBackground": ["普林斯顿大学 博士 · 计算化学/物理（师从鄂维南与 Roberto Car）"],
+    "workHistory": [
+      "深势科技 联合创始人、首席科学家",
+      "DeePMD-kit 主要作者",
+      "DeepModeling 开源社区发起者"
+    ],
+    "bio": "长期深耕 AI for Science、分子动力学模拟与 AI 新药研发，兼具顶尖科研能力、开源生态影响力与产业落地经验。",
+    "thesis": "相信 AI 与分子模拟的结合将重塑药物研发与材料设计效率，开源生态会成为 AI4S 持续突破的基础设施。",
+    "tags": ["AI+新药研发", "分子模拟", "分子动力学", "开源社区"],
+    "stats": {
+      "citations": 18400,
+      "hIndex": 52,
+      "papers": 120,
+      "collaborators": 35
+    },
+    "highlights": [
+      "2020年因\"深度势能\"分子模拟研究获国际高性能计算最高奖——戈登贝尔奖",
+      "主导开发DeePMD-kit开源框架，被全球数百个科研机构采用",
+      "创建AI for Science领域最大开源社区DeepModeling"
+    ],
+    "education": [
+      {
+        "period": "2012-2017",
+        "degree": "博士 · 计算化学/物理",
+        "university": "普林斯顿大学（师从鄂维南与Roberto Car）"
+      }
+    ],
+    "experience": [
+      {
+        "period": "2021-至今",
+        "position": "联合创始人、首席科学家",
+        "organization": "深势科技"
+      }
+    ],
+    "researchFields": [
+      "分子动力学模拟",
+      "AI for Science",
+      "新药研发",
+      "机器学习势函数",
+      "开源框架"
+    ],
+    "papers": [
+      {
+        "title": "End-to-end symmetry preserving inter-atomic potential energy model for finite and extended systems (DeePMD-kit)",
+        "authors": "张林峰 et al.",
+        "venue": "NeurIPS",
+        "year": 2018,
+        "citations": 3200,
+        "reads": 14000
+      },
+      {
+        "title": "DP-GEN: A concurrent learning platform for the generation of reliable deep learning based potential energy models",
+        "authors": "张林峰 et al.",
+        "venue": "Computer Physics Communications",
+        "year": 2020,
+        "citations": 1800,
+        "reads": 8600
+      }
+    ],
+    "collaborators": [
+      {
+        "name": "鄂维南",
+        "organization": "上海人工智能研究院",
+        "role": "博士导师/联合创始人"
+      },
+      {
+        "name": "Roberto Car",
+        "organization": "普林斯顿大学",
+        "role": "博士导师"
+      }
+    ],
+    "startup": {
+      "name": "深势科技",
+      "industry": "AI for Science",
+      "stage": "B轮",
+      "funding": "数亿元",
+      "foundedDate": "2021.01.01",
+      "description": "专注于AI驱动的分子模拟与药物研发，提供全流程AI科学计算平台。",
+      "highlights": [
+        {
+          "title": "核心产品",
+          "description": "DeePMD-kit 开源框架已被全球数百家科研机构使用；Hermite平台为药企提供端到端AI药物研发服务。"
+        }
+      ],
+      "product": "Hermite AI药物研发平台，覆盖靶点发现、分子生成、虚拟筛选全流程。",
+      "businessInfo": {
+        "creditCode": "",
+        "fundingStage": "B轮",
+        "foundedDate": "2021",
+        "investment": "数亿元",
+        "legalRep": "张林峰",
+        "address": "北京市",
+        "businessScope": "AI科学计算软件开发与服务"
+      },
+      "team": [
+        {
+          "name": "张林峰",
+          "role": "联合创始人/首席科学家",
+          "education": "普林斯顿大学博士",
+          "bio": "DeePMD-kit主要作者，戈登贝尔奖得主。"
+        }
+      ],
+      "news": [
+        {
+          "date": "2023-06-01",
+          "title": "深势科技完成B轮融资，加速AI药物研发商业化"
+        }
+      ]
+    },
+    "insights": [
+      "AI与分子动力学的结合将加速新药研发10倍以上",
+      "开源生态是AI4S持续发展的核心驱动力",
+      "从\"模拟\"到\"设计\"是分子AI的下一个突破方向"
+    ],
+    "interviews": [
+      {
+        "date": "2025.09.20",
+        "duration": "40分钟",
+        "title": "AI分子模拟：从科研工具到药物发现引擎",
+        "summary": "张林峰详细介绍了DeePMD-kit在工业界的落地情况，以及深势科技如何将开源积累转化为商业产品，探讨了AI4S未来在材料与生命科学领域的发展路径。",
+        "tags": ["AI4S", "分子模拟", "药物发现", "开源"]
+      }
+    ]
+  },
+  {
+    "id": "investor-weifanjie",
+    "roleType": "investor",
+    "name": "魏凡杰",
+    "avatar": "/images/ai-for-talent/weifanjie.jpg",
+    "matchScore": 98,
+    "title": "管理人",
+    "organization": "上海国投未来产业基金",
+    "location": "上海",
+    "investmentFields": ["硬科技", "先进制造", "科技创新"],
+    "investmentStages": ["A轮", "B轮", "产业基金"],
+    "investmentStyle": "产业导向、长期主义、重战略协同与区域资源整合",
+    "educationBackground": ["产业投资与科技创新领域长期从业背景"],
+    "workHistory": ["上海国投未来产业基金管理人", "持续关注科创投资与产业升级方向"],
+    "bio": "聚焦科技创新和未来产业投资，偏好具备技术壁垒、产业协同价值与长期成长性的团队。",
+    "thesis": "更看重产业价值、战略落地与区域资源协同，希望陪伴真正有核心能力的科技项目成长。",
+    "tags": ["科创投资", "未来产业", "产业基金", "长期资本"]
+  },
+  {
+    "id": "founder-001",
+    "roleType": "founder",
+    "name": "周聿铭",
+    "avatar": "https://picsum.photos/200/300?random=31",
+    "matchScore": 94,
+    "title": "创始人兼 CEO",
+    "organization": "灵构智能",
+    "location": "上海",
+    "field": "具身智能 / 工业机器人",
+    "investmentFields": ["具身智能", "工业机器人", "智能制造"],
+    "investmentStages": ["Pre-A", "A轮", "产业落地"],
+    "investmentStyle": "工程化导向、节奏明确、愿意深度共创",
+    "educationBackground": ["上海交通大学 机械工程 学士", "卡耐基梅隆大学 机器人学 硕士"],
+    "workHistory": ["前ABB机器人算法负责人", "现灵构智能创始人兼 CEO"],
+    "bio": "专注于具身智能在柔性制造场景中的落地，擅长把算法能力快速转成可交付产品。",
+    "thesis": "希望找到真正理解制造业节奏、愿意陪伴团队打磨产品与渠道的长期投资人。",
+    "tags": ["机器人", "工业场景", "具身智能", "ToB交付"]
+  },
+  {
+    "id": "founder-002",
+    "roleType": "founder",
+    "name": "林知夏",
+    "avatar": "https://picsum.photos/200/300?random=32",
+    "matchScore": 90,
+    "title": "联合创始人、CEO",
+    "organization": "星络医疗智能",
+    "location": "北京",
+    "field": "AI 医疗 / 临床决策",
+    "investmentFields": ["AI医疗", "临床决策", "医学影像"],
+    "investmentStages": ["A轮", "医院合作", "商业化验证"],
+    "investmentStyle": "理性克制、重证据链、擅长多方协同推进",
+    "educationBackground": ["北京大学 医学部 临床医学", "清华大学 生物医学工程 博士"],
+    "workHistory": [
+      "前顶级三甲医院医生",
+      "前医疗AI公司产品负责人",
+      "现星络医疗智能联合创始人、CEO"
+    ],
+    "bio": "深耕医疗 AI 与医院数字化协同，重视合规、真实场景验证和长期医学价值。",
+    "thesis": "期待与理解医疗周期和政策环境的投资人合作，一起推进产品从试点走向规模化。",
+    "tags": ["AI医疗", "医疗合规", "医学影像", "医院数字化"]
+  },
+  {
+    "id": "founder-003",
+    "roleType": "founder",
+    "name": "顾承泽",
+    "avatar": "https://picsum.photos/200/300?random=33",
+    "matchScore": 87,
+    "title": "创始人",
+    "organization": "观维科技",
+    "location": "深圳",
+    "field": "边缘 AI / 智能硬件",
+    "investmentFields": ["边缘AI", "智能硬件", "低功耗芯片应用"],
+    "investmentStages": ["天使轮", "Pre-A", "量产准备"],
+    "investmentStyle": "行动快、产品导向、对资源整合效率要求高",
+    "educationBackground": ["哈尔滨工业大学 自动化 学士", "香港科技大学 电子工程 硕士"],
+    "workHistory": ["前大疆感知算法工程师", "前OPPO智能硬件产品经理", "现观维科技创始人"],
+    "bio": "关注低功耗智能硬件与边缘推理一体化方案，擅长打磨消费级和行业级双场景产品。",
+    "thesis": "希望引入能帮助打开供应链与渠道资源的投资人，提升量产与市场扩张效率。",
+    "tags": ["边缘计算", "智能硬件", "供应链", "量产"]
+  },
+  {
+    "id": "founder-004",
+    "roleType": "founder",
+    "name": "许闻笙",
+    "avatar": "https://picsum.photos/200/300?random=34",
+    "matchScore": 83,
+    "title": "联合创始人、CEO",
+    "organization": "谛听数据",
+    "location": "杭州",
+    "field": "企业 AI / 数据智能",
+    "investmentFields": ["企业AI", "数据智能", "Agent 工作流"],
+    "investmentStages": ["Seed", "Pre-A", "客户扩张"],
+    "investmentStyle": "产品细腻、重复盘、善于用数据驱动决策",
+    "educationBackground": ["复旦大学 统计学 学士", "伦敦政治经济学院 数据科学 硕士"],
+    "workHistory": [
+      "前阿里云数据平台主管",
+      "前字节跳动商业分析负责人",
+      "现谛听数据联合创始人、CEO"
+    ],
+    "bio": "致力于把企业内部数据系统和 Agent 工作流打通，提升知识型组织协作效率。",
+    "thesis": "更希望找到理解企业软件销售周期、愿意一起打磨 GTM 路径的投资伙伴。",
+    "tags": ["企业服务", "Agent", "数据智能", "GTM"]
+  },
+  {
+    "id": "investor-001",
+    "roleType": "investor",
+    "name": "王舒远",
+    "avatar": "https://picsum.photos/200/300?random=11",
+    "matchScore": 92,
+    "title": "合伙人",
+    "organization": "远望资本",
+    "location": "上海",
+    "investmentFields": ["企业服务", "AI Infra", "工业软件"],
+    "investmentStages": ["天使轮", "Pre-A", "A轮"],
+    "investmentStyle": "高频深聊、偏长期陪跑、重技术判断",
+    "educationBackground": ["清华大学 计算机科学 学士", "斯坦福大学 管理科学 硕士"],
+    "workHistory": ["前腾讯云战略投资", "前红杉中国分析师", "现远望资本合伙人"],
+    "bio": "长期关注技术壁垒清晰、创始人认知强的硬科技与 AI 项目，愿意在早期提供战略与产业资源支持。",
+    "thesis": "寻找具备长期主义、技术驱动和产业穿透力的创业团队。"
+  },
+  {
+    "id": "investor-002",
+    "roleType": "investor",
+    "name": "张知远",
+    "avatar": "https://picsum.photos/200/300?random=12",
+    "matchScore": 88,
+    "title": "投资董事",
+    "organization": "星图创投",
+    "location": "北京",
+    "investmentFields": ["AI 应用", "自动化", "机器人"],
+    "investmentStages": ["Pre-A", "A轮", "A+轮"],
+    "investmentStyle": "决策快，但要求高密度信息同步",
+    "educationBackground": ["北京大学 自动化系 学士", "MIT 电子工程与计算机 硕士"],
+    "workHistory": ["前商汤战略合作负责人", "前真格基金投资经理", "现星图创投投资董事"],
+    "bio": "偏好产品和商业化同时推进的团队，重视创始人在复杂合作场景中的判断能力和推进效率。",
+    "thesis": "关注 AI 应用落地效率，愿意帮助被投企业梳理关键合作网络。"
+  },
+  {
+    "id": "investor-003",
+    "roleType": "investor",
+    "name": "李景初",
+    "avatar": "https://picsum.photos/200/300?random=13",
+    "matchScore": 85,
+    "title": "管理合伙人",
+    "organization": "蓝域资本",
+    "location": "深圳",
+    "investmentFields": ["半导体", "先进制造", "AI 芯片"],
+    "investmentStages": ["种子轮", "天使轮", "Pre-A"],
+    "investmentStyle": "产业资源型、沟通务实、重长期信任",
+    "educationBackground": ["上海交通大学 微电子 学士", "香港科技大学 MBA"],
+    "workHistory": ["前华为供应链战略经理", "前深创投副总裁", "现蓝域资本管理合伙人"],
+    "bio": "偏好底层技术扎实、节奏稳的创业者，能帮助团队打通制造和供应链资源。",
+    "thesis": "寻找能够沉下心做核心壁垒，同时具备产业化耐心的创始团队。"
+  },
+  {
+    "id": "investor-004",
+    "roleType": "investor",
+    "name": "远川",
+    "avatar": "https://picsum.photos/200/300?random=14",
+    "matchScore": 78,
+    "title": "投资合伙人",
+    "organization": "北极星基金",
+    "location": "杭州",
+    "investmentFields": ["SaaS", "开发者工具", "数据平台"],
+    "investmentStages": ["天使轮", "A轮"],
+    "investmentStyle": "逻辑导向、重产品节奏与团队复盘能力",
+    "educationBackground": ["浙江大学 软件工程 学士", "INSEAD MBA"],
+    "workHistory": ["前阿里云产品负责人", "前GGV投资总监", "现北极星基金投资合伙人"],
+    "bio": "善于帮助团队搭建增长和组织节奏，更在意创始人是否愿意持续迭代认知。",
+    "thesis": "看重执行力与认知升级能力，希望找到能长期一起打磨产品方向的人。"
+  },
+  {
+    "id": "investor-005",
+    "roleType": "investor",
+    "name": "Tina",
+    "avatar": "https://picsum.photos/200/300?random=15",
+    "matchScore": 65,
+    "title": "Principal",
+    "organization": "Vertex Frontier",
+    "location": "新加坡",
+    "investmentFields": ["全球化 SaaS", "AI Agent", "Fintech"],
+    "investmentStages": ["Seed", "Pre-A", "A轮"],
+    "investmentStyle": "国际化视角、偏数据验证、重全球扩张潜力",
+    "educationBackground": [
+      "National University of Singapore 计算机科学 学士",
+      "Columbia University 金融工程 硕士"
+    ],
+    "workHistory": [
+      "Former Grab Strategy Lead",
+      "Former Insight Partners Associate",
+      "Current Vertex Frontier Principal"
+    ],
+    "bio": "熟悉东南亚与北美双市场的 AI 创业生态，更适合未来有国际化野心的技术型团队。",
+    "thesis": "寻找可以跨市场复制的 Agent 产品与拥有清晰 GTM 节奏的团队。"
+  }
+]
