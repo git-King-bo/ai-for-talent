@@ -16,7 +16,7 @@
   <div v-show="!isGenerating" class="report-container">
     <div class="header-section">
       <h1 class="main-title">AI4S 投资会议总结报告</h1>
-      <p class="subtitle">高匹配度对接 · 决策数据看板</p>
+      <p class="subtitle">高匹配度对接 · 建议尽快联系</p>
     </div>
 
     <div class="dashboard-grid">
@@ -118,22 +118,7 @@
             <h3>匹配度分析</h3>
           </div>
           <div ref="radarChartRef" class="chart-box"></div>
-          <div class="chart-caption">投资预期 · 行业经验 · 资源互补 · 价值观 · 沟通风格</div>
         </div>
-
-        <!-- 市场增长柱状图 -->
-        <div class="glass-card chart-card">
-          <div class="card-header">
-            <span class="card-icon">📈</span>
-            <h3>市场增长趋势</h3>
-          </div>
-          <div ref="growthChartRef" class="chart-box small-chart"></div>
-          <div class="trend-note">
-            <span>2025基准 $300亿</span>
-            <span>年复合增长率 35%</span>
-          </div>
-        </div>
-
         <!-- 竞争优势与里程碑 -->
         <div class="glass-card">
           <div class="card-header">
@@ -142,7 +127,6 @@
           </div>
           <ul class="point-list compact">
             <li>5项AI4S关键专利 + 自主科学计算框架</li>
-            <li>市场验证数据：12家顶级实验室深度合作</li>
             <li>团队背景：DeepMind / 清华 / 斯坦福核心骨干</li>
           </ul>
           <div class="sub-header" style="margin-top: 1rem">关键里程碑</div>
@@ -150,8 +134,15 @@
             <div>▪ Q2 发布AI4S 2.0公测版</div>
             <div>▪ Q3 签约30+科研机构/高校</div>
             <div>▪ Q4 启动B轮筹备 & 海外拓展</div>
-            <div>▪ 18个月达到盈亏平衡点</div>
           </div>
+        </div>
+        <!-- 商业前景柱状图 -->
+        <div class="glass-card chart-card">
+          <div class="card-header">
+            <span class="card-icon">📈</span>
+            <h3>商业前景</h3>
+          </div>
+          <div ref="growthChartRef" class="chart-box small-chart"></div>
         </div>
       </div>
     </div>
@@ -175,7 +166,7 @@ const selectedTalent = computed(
 )
 
 const roleCardBadge = computed(() =>
-  selectedTalent.value?.roleType === 'investor' ? '投资人画像已解锁' : '创业者画像已解锁',
+  selectedTalent.value?.roleType === 'investor' ? '联系方式已解锁' : '联系方式已解锁',
 )
 
 const roleCardTitle = computed(() => {
@@ -236,9 +227,9 @@ const indicators = [
   { name: '沟通风格匹配', max: 100 },
 ]
 
-// 柱状图数据
-const marketYears = ['2025', '2026', '2027']
-const marketValues = [300, 405, 546.75]
+// 商业前景数据
+const marketYears = ['落地验证', '客户扩张', '产业协同']
+const marketValues = [72, 84, 91]
 
 // 初始化ECharts图表
 const initCharts = () => {
@@ -283,7 +274,7 @@ const initCharts = () => {
         axisPointer: { type: 'shadow' },
         backgroundColor: 'rgba(0,0,0,0.7)',
       },
-      grid: { top: 20, left: 45, right: 20, bottom: 20, containLabel: true },
+      grid: { top: 28, left: 42, right: 16, bottom: 18, containLabel: true },
       xAxis: {
         type: 'category',
         data: marketYears,
@@ -292,7 +283,8 @@ const initCharts = () => {
       },
       yAxis: {
         type: 'value',
-        name: '市场规模 (亿美元)',
+        name: '前景评分',
+        max: 100,
         nameTextStyle: { color: '#a5bbec' },
         axisLabel: { color: '#ccd9ff' },
         splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } },
@@ -323,7 +315,7 @@ const initCharts = () => {
             position: 'top',
             color: '#eef2ff',
             fontWeight: 'bold',
-            formatter: '{c} 亿',
+            formatter: '{c}',
           },
         },
       ],
@@ -766,13 +758,19 @@ onMounted(() => {
 /* 图表卡片 */
 .chart-card {
   padding-bottom: 1rem;
+  overflow: visible;
 }
 .chart-box {
   width: 100%;
-  height: 260px;
+  height: 268px;
+  overflow: visible;
 }
 .small-chart {
-  height: 210px;
+  height: 228px;
+}
+
+.chart-box :deep(canvas) {
+  display: block;
 }
 .chart-caption,
 .trend-note {

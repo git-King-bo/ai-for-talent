@@ -35,12 +35,12 @@ export const layoutChildrenRoutes = [
 ]
 
 export const appRoutes = [
-  {
-    path: '/',
-    component: () => import('@/layouts/index.vue'),
-    redirect: '/dashboard',
-    children: layoutChildrenRoutes,
-  },
+  // {
+  //   path: '/',
+  //   component: () => import('@/layouts/index.vue'),
+  //   redirect: '/dashboard',
+  //   children: layoutChildrenRoutes,
+  // },
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
@@ -50,7 +50,8 @@ export const appRoutes = [
     },
   },
   {
-    path: '/AiForTalent',
+    path: '/',
+    alias: '/AiForTalent',
     name: 'AiForTalent',
     component: () => import('@/views/aiForTalent/index.vue'),
     meta: {

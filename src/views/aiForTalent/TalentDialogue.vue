@@ -66,7 +66,7 @@ function createInitialMessages(talent) {
     {
       id: `${talent.id}-seed-2`,
       sender: 'me',
-      text: '我们现在在做一套 AI 驱动的产业基础设施，重点放在提升复杂场景里的判断效率，已经拿到几家目标客户的试点反馈。',
+      text: '我们在做AI4S的基础设施。具体来说，是用深度学习来预测蛋白质-小分子的结合模式，帮助药企把早期药物筛选的时间从6个月压缩到2周。我们已经在3家Top 10药企部署了试点项目，准确率达到92%，比传统分子对接算法提升了40个百分点',
       timestamp: new Date(start.getTime() + 60 * 1000),
     },
     {
@@ -153,7 +153,6 @@ const quickFacts = computed(() => {
 
   return [
     { label: '合作风格', value: talent.investmentStyle },
-    { label: '教育背景', value: talent.educationBackground?.[0] ?? '待补充' },
     { label: '代表履历', value: talent.workHistory?.[0] ?? '待补充' },
   ]
 })
@@ -325,7 +324,7 @@ onBeforeUnmount(() => {
               </div>
             </div>
 
-            <div class="dialogue-sidebar__group">
+            <!-- <div class="dialogue-sidebar__group">
               <span class="dialogue-sidebar__group-label">当前阶段</span>
               <div class="dialogue-sidebar__chips">
                 <span
@@ -336,7 +335,7 @@ onBeforeUnmount(() => {
                   {{ stage }}
                 </span>
               </div>
-            </div>
+            </div> -->
 
             <div class="dialogue-sidebar__facts">
               <div v-for="fact in quickFacts" :key="fact.label" class="dialogue-sidebar__fact">
