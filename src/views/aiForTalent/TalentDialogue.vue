@@ -1,6 +1,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { aiForTalentRouteNames } from '@/apps/ai-for-talent/route-names'
 import rawTalentPool from './mockTalentPool.json'
 
 const route = useRoute()
@@ -249,7 +250,7 @@ function handleEndDialogue() {
 
   window.setTimeout(() => {
     router.push({
-      name: 'IntelligentSummary',
+      name: aiForTalentRouteNames.intelligentSummary,
       query: {
         id: activeTalent.value?.id,
       },

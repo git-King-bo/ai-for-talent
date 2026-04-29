@@ -2,6 +2,22 @@
 
 `AI for Talent` 是一个基于 `Vue 3 + Vite` 构建的前端项目，当前主要用于展示 AI 驱动的人才匹配与智能创投交互流程。项目包含首页体验流、人才匹配、对话模拟、智能总结等页面，也保留了工作台、人才库、职位管理等后台式页面结构。
 
+## Tauri 壳模板
+
+当前仓库已经把桌面端抽成了一层可复用 Tauri 壳，抽离说明见 [docs/tauri-shell-embed.md](./docs/tauri-shell-embed.md)。
+
+如果你想直接查看“空壳”模式，可以运行：
+
+```bash
+npm run desktop:starter
+```
+
+如果你想直接生成一个新的业务模块骨架，可以运行：
+
+```bash
+npm run shell:new -- your-app-id "Your App Name"
+```
+
 ## 项目简介
 
 当前项目以“AI for Talent / 智能创投”体验链路为核心，首页支持从角色选择开始，逐步进入场景问答、AI 对话与画像分析，再延展到匹配推荐、对话详情和总结报告页面。

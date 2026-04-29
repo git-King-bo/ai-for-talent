@@ -4,9 +4,9 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PACKAGE_JSON="$ROOT_DIR/package.json"
-TAURI_CONFIG="$ROOT_DIR/src-tauri/tauri.conf.json"
+SHELL_CONFIG="$ROOT_DIR/shell.config.json"
 DMG_ASSET_DIR="$ROOT_DIR/src-tauri/dmg"
-APP_NAME="$(node -e "const fs=require('fs'); const config=JSON.parse(fs.readFileSync(process.argv[1], 'utf8')); process.stdout.write(config.productName || 'AI for Talent');" "$TAURI_CONFIG")"
+APP_NAME="$(node -e "const fs=require('fs'); const config=JSON.parse(fs.readFileSync(process.argv[1], 'utf8')); process.stdout.write(config.tauri?.productName || 'Desktop Workspace');" "$SHELL_CONFIG")"
 APP_VERSION="$(node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync(process.argv[1], 'utf8')); process.stdout.write(pkg.version);" "$PACKAGE_JSON")"
 APP_ARCH="$(uname -m)"
 APP_BUNDLE_DIR="$ROOT_DIR/src-tauri/target/release/bundle/macos"

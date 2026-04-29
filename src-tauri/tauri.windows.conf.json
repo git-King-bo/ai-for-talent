@@ -9,7 +9,7 @@
       },
       "nsis": {
         "installMode": "currentUser",
-        "startMenuFolder": "AI for Talent"
+        "startMenuFolder": "Desktop Workspace"
       }
     }
   }

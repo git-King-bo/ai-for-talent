@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { resolveDocumentTitle } from '@/config/shell'
 import { appRoutes } from './routes'
 
 const router = createRouter({
@@ -10,8 +11,7 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
-  const title = to.meta?.title ? `${to.meta.title} | AI for Talent` : 'AI for Talent'
-  document.title = title
+  document.title = resolveDocumentTitle(to.meta?.title)
 })
 
 export default router

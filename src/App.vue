@@ -1,13 +1,11 @@
 <script setup>
-import StarfieldBackground from '@/components/StarfieldBackground.vue'
-import TalentBg from '@/components/TalentBg.vue'
+import ShellBackground from '@/components/shell/ShellBackground.vue'
 import { RouterView } from 'vue-router'
 </script>
 
 <template>
   <div class="app-shell">
-    <TalentBg />
-    <!-- <StarfieldBackground></StarfieldBackground> -->
+    <ShellBackground />
     <div class="app-shell__content">
       <RouterView />
     </div>

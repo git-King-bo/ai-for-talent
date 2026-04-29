@@ -5,7 +5,7 @@
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#071121" />
-    <title>AI for Talent</title>
+    <title>%VITE_APP_TITLE%</title>
     <style>
       :root {
         color-scheme: dark;
@@ -30,11 +30,7 @@
 
       body {
         font-family:
-          "SF Pro Display",
-          "PingFang SC",
-          "Hiragino Sans GB",
-          "Microsoft YaHei",
-          "Noto Sans SC",
+          'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC',
           sans-serif;
       }
 
@@ -59,7 +55,7 @@
           visibility 0.45s ease;
       }
 
-      #boot-splash[data-desktop="true"] {
+      #boot-splash[data-desktop='true'] {
         display: grid;
       }
 
@@ -93,7 +89,7 @@
       }
 
       .boot-card::before {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         border-radius: inherit;
@@ -155,12 +151,17 @@
       }
 
       .boot-bar::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         width: 42%;
         border-radius: inherit;
-        background: linear-gradient(90deg, var(--boot-accent), var(--boot-warm), var(--boot-accent));
+        background: linear-gradient(
+          90deg,
+          var(--boot-accent),
+          var(--boot-warm),
+          var(--boot-accent)
+        );
         box-shadow: 0 0 18px var(--boot-glow);
         animation: boot-slide 1.25s ease-in-out infinite;
       }
@@ -190,18 +191,15 @@
       <div class="boot-card">
         <div class="boot-badge">
           <span class="boot-dot"></span>
-          Desktop Launch Sequence
+          %VITE_BOOT_BADGE%
         </div>
-        <h1 class="boot-title">AI for Talent</h1>
-        <p class="boot-subtitle">
-          Preparing the talent workspace, restoring the local interface, and loading the first
-          scene.
-        </p>
+        <h1 class="boot-title">%VITE_BOOT_TITLE%</h1>
+        <p class="boot-subtitle">%VITE_BOOT_SUBTITLE%</p>
         <div class="boot-progress">
           <div class="boot-bar"></div>
           <div class="boot-meta">
-            <span>Booting desktop shell</span>
-            <span>Vue + Tauri</span>
+            <span>%VITE_BOOT_STATUS%</span>
+            <span>%VITE_BOOT_RUNTIME_LABEL%</span>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "AI for Talent",
+  "productName": "Desktop Workspace",
   "version": "../package.json",
-  "identifier": "com.yuanshu.talentai",
+  "identifier": "com.example.desktopworkspace",
   "build": {
     "beforeDevCommand": "npm run dev:desktop",
     "devUrl": "http://localhost:8066",
@@ -14,7 +14,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "AI for Talent",
+        "title": "Desktop Workspace",
         "width": 1440,
         "height": 960,
         "minWidth": 1200,
@@ -38,7 +38,7 @@
   },
   "bundle": {
     "active": true,
-    "category": "Business",
+    "category": "Utility",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -46,8 +46,8 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "publisher": "yuanshu",
-    "shortDescription": "AI-powered talent matching and conversation workflows in a desktop app.",
-    "longDescription": "AI for Talent packages the existing Vue and Vite experience as a fast Tauri desktop app for talent matching, candidate dialogue simulation, and intelligent summary workflows."
+    "publisher": "your-team",
+    "shortDescription": "Reusable Tauri desktop shell built on Vue and Vite.",
+    "longDescription": "This repository provides a reusable Tauri desktop shell with a Vue and Vite frontend, environment-aware build commands, desktop splash support, and packaging defaults that can be embedded into other projects."
   }
 }

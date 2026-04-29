@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { aiForTalentRouteNames } from '@/apps/ai-for-talent/route-names'
 import rawTalentPool from './mockTalentPool.json'
 
 const route = useRoute()
@@ -109,7 +110,7 @@ const drawerChallenges = computed(() => {
 })
 
 function handleRestart() {
-  router.push({ name: 'AiForTalent' })
+  router.push({ name: aiForTalentRouteNames.home })
 }
 
 function handleSelectTalent(id) {
@@ -120,7 +121,7 @@ function handleStartDialogue() {
   if (!selectedTalent.value) return
 
   router.push({
-    name: 'TalentDialogue',
+    name: aiForTalentRouteNames.talentDialogue,
     query: {
       id: selectedTalent.value.id,
     },

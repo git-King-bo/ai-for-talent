@@ -42,3 +42,4 @@ __screenshots__/
 /src-tauri/target
 /src-tauri/dmg/background.png
 /src-tauri/dmg/background@2x.png
+/.tauri/

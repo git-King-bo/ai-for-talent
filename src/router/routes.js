@@ -1,3 +1,5 @@
+import { activeApp } from '@/apps'
+
 export const layoutChildrenRoutes = [
   {
     path: 'dashboard',
@@ -34,7 +36,7 @@ export const layoutChildrenRoutes = [
   },
 ]
 
-export const appRoutes = [
+const sharedRoutes = [
   // {
   //   path: '/',
   //   component: () => import('@/layouts/index.vue'),
@@ -49,37 +51,6 @@ export const appRoutes = [
       title: '页面不存在',
     },
   },
-  {
-    path: '/',
-    alias: '/AiForTalent',
-    name: 'AiForTalent',
-    component: () => import('@/views/aiForTalent/index.vue'),
-    meta: {
-      title: '智能创投',
-    },
-  },
-  {
-    path: '/MatchingSearch',
-    name: 'MatchingSearch',
-    component: () => import('@/views/aiForTalent/MatchingSearch.vue'),
-    meta: {
-      title: '人才匹配',
-    },
-  },
-  {
-    path: '/TalentDialogue',
-    name: 'TalentDialogue',
-    component: () => import('@/views/aiForTalent/TalentDialogue.vue'),
-    meta: {
-      title: '人才对话',
-    },
-  },
-  {
-    path: '/IntelligentSummary',
-    name: 'IntelligentSummary',
-    component: () => import('@/views/aiForTalent/IntelligentSummary.vue'),
-    meta: {
-      title: '智能总结',
-    },
-  },
 ]
+
+export const appRoutes = [...activeApp.createRoutes(), ...sharedRoutes]

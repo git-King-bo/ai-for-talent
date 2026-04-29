@@ -1,0 +1,25 @@
+{
+  "app": {
+    "name": "Desktop Workspace",
+    "titleSuffix": "Desktop Workspace",
+    "background": "none",
+    "activeAppId": "starter"
+  },
+  "bootSplash": {
+    "badge": "Desktop Launch Sequence",
+    "title": "Desktop Workspace",
+    "subtitle": "Preparing the desktop shell, restoring local resources, and loading your first view.",
+    "status": "Booting desktop shell",
+    "runtimeLabel": "Vue + Tauri"
+  },
+  "tauri": {
+    "productName": "Desktop Workspace",
+    "identifier": "com.example.desktopworkspace",
+    "publisher": "your-team",
+    "windowTitle": "Desktop Workspace",
+    "category": "Utility",
+    "shortDescription": "Reusable Tauri desktop shell built on Vue and Vite.",
+    "longDescription": "This project provides a reusable Tauri desktop shell with environment-aware build commands, a configurable boot splash, and a module-based frontend entry.",
+    "windowsStartMenuFolder": "Desktop Workspace"
+  }
+}

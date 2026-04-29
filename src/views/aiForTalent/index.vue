@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { aiForTalentRouteNames } from '@/apps/ai-for-talent/route-names'
 import RoleSelectPanel from '@/components/aiFortalent/RoleSelectPanel.vue'
 import SceneQA from '@/components/aiFortalent/SceneQA.vue'
 import AgentInterviewChat from '@/components/aiFortalent/AgentInterviewChat.vue'
@@ -47,7 +48,7 @@ function handleGenerateAgent(payload) {
 
 function handleStartMatching(payload = {}) {
   router.push({
-    name: 'MatchingSearch',
+    name: aiForTalentRouteNames.matchingSearch,
     query: {
       role: payload.role ?? selectedRole.value?.id ?? 'founder',
       centerId: payload.centerId ?? undefined,

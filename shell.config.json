@@ -1,0 +1,25 @@
+{
+  "app": {
+    "name": "AI for Talent",
+    "titleSuffix": "AI for Talent",
+    "background": "talent",
+    "activeAppId": "ai-for-talent"
+  },
+  "bootSplash": {
+    "badge": "Desktop Launch Sequence",
+    "title": "AI for Talent",
+    "subtitle": "Preparing the talent workspace, restoring the local interface, and loading the first scene.",
+    "status": "Booting desktop shell",
+    "runtimeLabel": "Vue + Tauri"
+  },
+  "tauri": {
+    "productName": "AI for Talent",
+    "identifier": "com.yuanshu.talentai",
+    "publisher": "yuanshu",
+    "windowTitle": "AI for Talent",
+    "category": "Business",
+    "shortDescription": "AI-powered talent matching and conversation workflows in a desktop app.",
+    "longDescription": "AI for Talent packages the existing Vue and Vite experience as a fast Tauri desktop app for talent matching, candidate dialogue simulation, and intelligent summary workflows.",
+    "windowsStartMenuFolder": "AI for Talent"
+  }
+}
