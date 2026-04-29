@@ -1,5 +1,20 @@
 const DEFAULT_TIMEOUT = 10000
 
+function joinURL(baseURL, url) {
+  if (/^https?:\/\//i.test(url)) {
+    return url
+  }
+
+  const normalizedBase = String(baseURL || '').replace(/\/+$/, '')
+  const normalizedUrl = String(url || '').replace(/^\/+/, '')
+
+  if (!normalizedBase) {
+    return `/${normalizedUrl}`
+  }
+
+  return `${normalizedBase}/${normalizedUrl}`
+}
+
 function isPlainObject(value) {
   return Object.prototype.toString.call(value) === '[object Object]'
 }
@@ -86,7 +101,7 @@ class HttpClient {
       }
     }
 
-    const requestUrl = `${this.baseURL}${finalConfig.url}${buildQuery(finalConfig.params)}`
+    const requestUrl = `${joinURL(this.baseURL, finalConfig.url)}${buildQuery(finalConfig.params)}`
 
     try {
       const response = await fetch(requestUrl, requestInit)

@@ -4,14 +4,208 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="theme-color" content="#071121" />
+    <title>AI for Talent</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --boot-bg: #040913;
+        --boot-bg-soft: rgba(11, 21, 41, 0.94);
+        --boot-line: rgba(139, 180, 255, 0.18);
+        --boot-glow: rgba(67, 124, 255, 0.28);
+        --boot-ink: #e7eefc;
+        --boot-muted: #8da4cc;
+        --boot-accent: #66b6ff;
+        --boot-warm: #f0ae67;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background:
+          radial-gradient(circle at top, rgba(35, 82, 177, 0.24), transparent 32%),
+          linear-gradient(180deg, #08101f 0%, var(--boot-bg) 58%, #02050c 100%);
+      }
+
+      body {
+        font-family:
+          "SF Pro Display",
+          "PingFang SC",
+          "Hiragino Sans GB",
+          "Microsoft YaHei",
+          "Noto Sans SC",
+          sans-serif;
+      }
+
+      #app {
+        min-height: 100vh;
+      }
+
+      #boot-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(70, 121, 255, 0.2), transparent 28%),
+          radial-gradient(circle at 80% 16%, rgba(74, 195, 255, 0.14), transparent 22%),
+          linear-gradient(180deg, rgba(6, 12, 24, 0.86), rgba(4, 8, 18, 0.98));
+        opacity: 1;
+        transition:
+          opacity 0.45s ease,
+          visibility 0.45s ease;
+      }
+
+      #boot-splash[data-desktop="true"] {
+        display: grid;
+      }
+
+      #boot-splash.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .boot-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(117, 156, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(117, 156, 255, 0.08) 1px, transparent 1px);
+        background-size: 80px 80px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 90%);
+      }
+
+      .boot-card {
+        position: relative;
+        width: min(540px, calc(100vw - 48px));
+        padding: 28px 30px;
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(15, 24, 46, 0.92), var(--boot-bg-soft));
+        border: 1px solid var(--boot-line);
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.45),
+          0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        backdrop-filter: blur(18px);
+      }
+
+      .boot-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 34%);
+        pointer-events: none;
+      }
+
+      .boot-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        color: var(--boot-muted);
+        border: 1px solid rgba(121, 162, 255, 0.16);
+        background: rgba(9, 17, 34, 0.5);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .boot-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #84d4ff, #5d8dff);
+        box-shadow: 0 0 18px rgba(93, 141, 255, 0.65);
+      }
+
+      .boot-title {
+        margin: 18px 0 8px;
+        color: var(--boot-ink);
+        font-size: clamp(34px, 6vw, 52px);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        font-weight: 760;
+      }
+
+      .boot-subtitle {
+        margin: 0;
+        max-width: 420px;
+        color: var(--boot-muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .boot-progress {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .boot-bar {
+        position: relative;
+        height: 5px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(133, 171, 255, 0.12);
+      }
+
+      .boot-bar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 42%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--boot-accent), var(--boot-warm), var(--boot-accent));
+        box-shadow: 0 0 18px var(--boot-glow);
+        animation: boot-slide 1.25s ease-in-out infinite;
+      }
+
+      .boot-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: rgba(194, 211, 241, 0.78);
+        font-size: 12px;
+        letter-spacing: 0.02em;
+      }
+
+      @keyframes boot-slide {
+        0% {
+          transform: translateX(-115%);
+        }
+        100% {
+          transform: translateX(270%);
+        }
+      }
+    </style>
   </head>
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <body>
+    <div id="boot-splash" data-desktop="%VITE_TAURI_DESKTOP%" aria-hidden="true">
+      <div class="boot-grid"></div>
+      <div class="boot-card">
+        <div class="boot-badge">
+          <span class="boot-dot"></span>
+          Desktop Launch Sequence
+        </div>
+        <h1 class="boot-title">AI for Talent</h1>
+        <p class="boot-subtitle">
+          Preparing the talent workspace, restoring the local interface, and loading the first
+          scene.
+        </p>
+        <div class="boot-progress">
+          <div class="boot-bar"></div>
+          <div class="boot-meta">
+            <span>Booting desktop shell</span>
+            <span>Vue + Tauri</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

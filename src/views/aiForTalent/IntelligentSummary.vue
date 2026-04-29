@@ -151,15 +151,25 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, nextTick } from 'vue'
+import { computed, ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
-import * as echarts from 'echarts'
 import rawTalentPool from './mockTalentPool.json'
 
 const route = useRoute()
 const isGenerating = ref(true)
 const radarChartRef = ref(null)
 const growthChartRef = ref(null)
+let radarChartInstance = null
+let growthChartInstance = null
+let echartsModulePromise = null
+
+const getEcharts = async () => {
+  if (!echartsModulePromise) {
+    echartsModulePromise = import('@/utils/echarts').then((module) => module.default)
+  }
+
+  return echartsModulePromise
+}
 
 const selectedTalent = computed(
   () => rawTalentPool.find((talent) => talent.id === route.query.id) ?? rawTalentPool[0] ?? null,
@@ -232,10 +242,18 @@ const marketYears = ['落地验证', '客户扩张', '产业协同']
 const marketValues = [72, 84, 91]
 
 // 初始化ECharts图表
-const initCharts = () => {
+const handleChartsResize = () => {
+  radarChartInstance?.resize()
+  growthChartInstance?.resize()
+}
+
+const initCharts = async () => {
+  const echarts = await getEcharts()
+
   if (radarChartRef.value) {
-    const radarChart = echarts.init(radarChartRef.value)
-    radarChart.setOption({
+    radarChartInstance?.dispose()
+    radarChartInstance = echarts.init(radarChartRef.value)
+    radarChartInstance.setOption({
       backgroundColor: 'transparent',
       radar: {
         indicator: indicators,
@@ -263,12 +281,12 @@ const initCharts = () => {
       ],
       tooltip: { trigger: 'item', backgroundColor: 'rgba(10,20,40,0.9)', borderColor: '#5f8aff' },
     })
-    window.addEventListener('resize', () => radarChart.resize())
   }
 
   if (growthChartRef.value) {
-    const growthChart = echarts.init(growthChartRef.value)
-    growthChart.setOption({
+    growthChartInstance?.dispose()
+    growthChartInstance = echarts.init(growthChartRef.value)
+    growthChartInstance.setOption({
       tooltip: {
         trigger: 'axis',
         axisPointer: { type: 'shadow' },
@@ -320,23 +338,30 @@ const initCharts = () => {
         },
       ],
     })
-    window.addEventListener('resize', () => growthChart.resize())
   }
 }
 
 // 模拟加载动画
 onMounted(() => {
-  const minDisplayTime = 1600
+  const minDisplayTime = 700
   const startTime = Date.now()
   const finishLoading = () => {
     const elapsed = Date.now() - startTime
     const delay = Math.max(0, minDisplayTime - elapsed)
-    setTimeout(() => {
+    window.setTimeout(async () => {
       isGenerating.value = false
-      nextTick(() => initCharts())
+      await nextTick()
+      await initCharts()
+      window.addEventListener('resize', handleChartsResize)
     }, delay)
   }
   finishLoading()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleChartsResize)
+  radarChartInstance?.dispose()
+  growthChartInstance?.dispose()
 })
 </script>
 

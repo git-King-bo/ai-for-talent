@@ -6,9 +6,28 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+function hideBootSplash() {
+  const splash = document.getElementById('boot-splash')
+  if (!splash) return
 
-app.use(createPinia())
-app.use(router)
+  if (splash.dataset.desktop !== 'true') {
+    splash.remove()
+    return
+  }
 
-app.mount('#app')
+  splash.classList.add('is-hidden')
+  window.setTimeout(() => splash.remove(), 500)
+}
+
+async function bootstrap() {
+  const app = createApp(App)
+
+  app.use(createPinia())
+  app.use(router)
+  app.mount('#app')
+
+  await router.isReady()
+  window.requestAnimationFrame(() => hideBootSplash())
+}
+
+bootstrap()

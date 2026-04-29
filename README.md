@@ -81,6 +81,173 @@ npm run format
 
 当前格式化脚本仅针对 `src/` 目录执行。
 
+## 桌面端（Tauri）
+
+项目已经接入 `Tauri 2`，当前可以把现有 `Vue 3 + Vite` 页面直接打包为桌面应用。
+
+### 常用命令
+
+启动桌面开发模式：
+
+```bash
+npm run desktop:dev
+```
+
+桌面开发模式默认不自动打开 WebView DevTools。需要查看 `console`、网络请求和 DOM 时显式开启：
+
+```bash
+TAURI_DEVTOOLS=1 npm run desktop:dev
+```
+
+DevTools 显示由 Rust 入口控制：
+
+- 控制位置：`src-tauri/src/main.rs` 的 `should_open_devtools()`
+- 开关变量：`TAURI_DEVTOOLS=1` 打开，未设置或为 `0` 时关闭
+- `pre/prod` 的 release 包若需要变量开启 DevTools，必须使用 `npm run desktop:build:devtools` 构建，否则 Tauri 不会把 DevTools 能力编译进包里
+
+### 桌面环境变量
+
+桌面端通过 `TAURI_APP_ENV` 指定启动环境，`dev` 是默认值。Tauri 会把该变量传给 `beforeDevCommand` / `beforeBuildCommand`，再由 `scripts/run-vite-env.mjs` 选择对应的 Vite mode：
+
+- `TAURI_APP_ENV=dev` 加载 `.env.desktop-dev`
+- `TAURI_APP_ENV=test` 加载 `.env.desktop-test`
+- `TAURI_APP_ENV=pre` 加载 `.env.desktop-pre`
+- `TAURI_APP_ENV=prod` 加载 `.env.desktop-prod`
+
+常用命令：
+
+```bash
+npm run desktop:dev
+npm run desktop:dev:test
+npm run desktop:dev:pre
+npm run desktop:dev:prod
+```
+
+构建不同环境：
+
+```bash
+npm run desktop:build
+npm run desktop:build:test
+npm run desktop:build:pre
+npm run desktop:build:prod
+```
+
+也可以直接临时指定：
+
+```bash
+TAURI_APP_ENV=test npm run desktop:dev
+TAURI_APP_ENV=pre TAURI_DEVTOOLS=1 npm run desktop:dev
+```
+
+前端可读取 `VITE_` 前缀变量，例如 `import.meta.env.VITE_APP_ENV` 和 `import.meta.env.VITE_API_BASE_URL`。没有 `VITE_` 前缀的变量只给 Node/Tauri 构建或 Rust 运行进程使用，不会暴露到浏览器端代码。
+
+根据 `app-icon.svg` 重新生成整套应用图标：
+
+```bash
+npm run desktop:icon
+```
+
+构建调试版 macOS 桌面应用（输出 `.app`）：
+
+```bash
+npm run desktop:build:debug
+```
+
+构建正式版 macOS 桌面应用（`release`，默认输出 `.app`）：
+
+```bash
+npm run desktop:build
+```
+
+基于已构建的 `.app` 生成 macOS 安装包 `dmg`：
+
+```bash
+npm run desktop:package:dmg
+```
+
+强制刷新 DMG 背景后再生成安装包：
+
+```bash
+npm run desktop:package:dmg:refresh-bg
+```
+
+生成正式版桌面应用和安装包（`app + dmg`）：
+
+```bash
+npm run desktop:package
+```
+
+在 Windows 上生成安装包（`nsis + msi`）：
+
+```bash
+npm run desktop:package:win
+```
+
+仅生成 Windows `nsis` 安装器：
+
+```bash
+npm run desktop:package:win:nsis
+```
+
+仅生成 Windows `msi` 安装包：
+
+```bash
+npm run desktop:package:win:msi
+```
+
+### 产物位置
+
+- 桌面应用配置：`src-tauri/tauri.conf.json`
+- macOS 特定打包配置：`src-tauri/tauri.macos.conf.json`
+- Windows 特定打包配置：`src-tauri/tauri.windows.conf.json`
+- Rust 入口：`src-tauri/src/main.rs`
+- 调试构建产物：`src-tauri/target/debug/`
+- 正式构建产物：`src-tauri/target/release/`
+- macOS `.app` 输出目录：`src-tauri/target/release/bundle/macos/`
+- macOS `.dmg` 输出目录：`src-tauri/target/release/bundle/dmg/`
+- Windows `nsis` 输出目录：`src-tauri/target/release/bundle/nsis/`
+- Windows `msi` 输出目录：`src-tauri/target/release/bundle/msi/`
+
+### 自定义 DMG 背景
+
+- 如果存在 `src-tauri/dmg/background.png` 和 `src-tauri/dmg/background@2x.png`，打包时会直接使用它们
+- 如果这两张图不存在，脚本会自动生成默认背景
+- 想恢复默认背景时，删除这两张图后重新运行 `npm run desktop:package:dmg`
+- 如果你改了默认指引背景生成逻辑，但页面看起来没变，通常是因为旧的 `background*.png` 仍被复用；可直接运行 `npm run desktop:package:dmg:refresh-bg`
+
+### 当前接入方式
+
+- 前端仍然由 `Vite` 提供开发与生产构建
+- `Tauri` 通过 `beforeDevCommand` 自动启动前端开发服务器
+- `Tauri` 通过 `beforeBuildCommand` 自动构建前端静态资源
+- 桌面端版本号默认读取根目录 `package.json` 的 `version`
+- 生产配置已启用基础安全头、`CSP` 和 Rust `release` 优化
+
+### 正式发布流程
+
+1. 在 `package.json` 中更新版本号
+2. 如有新图标，替换 `src-tauri/icons/app-icon.svg`
+3. 运行 `npm run desktop:icon`
+4. 运行 `npm run desktop:package`
+5. 从 `src-tauri/target/release/bundle/` 取出 `.app` 或 `.dmg`
+
+### Windows 发布流程
+
+1. 在 Windows 机器上安装 Node、Rust 与 WebView2 相关构建环境
+2. 拉取项目代码并安装依赖
+3. 运行 `npm run desktop:package:win`
+4. 从 `src-tauri/target/release/bundle/nsis/` 取 `.exe`
+5. 从 `src-tauri/target/release/bundle/msi/` 取 `.msi`
+
+### 首次构建说明与限制
+
+- 首次运行桌面构建时，`cargo` 会下载 Rust 依赖，因此会比前端构建慢很多
+- 如果本机配置了代理，但代理端口不可用，Rust 依赖下载可能失败，需要先修复代理或临时清理代理环境
+- 当前仓库的 macOS `dmg` 使用自定义脚本生成，避免了受限终端环境下 `bundle_dmg.sh` 的 Finder/AppleScript 失败问题
+- 当前仓库的 macOS `dmg` 使用 `appdmg` 生成带背景和固定布局的拖拽安装页，不再是默认白底 Finder 样式
+- 如果后续要面向外部分发 macOS 安装包，还需要 Apple Developer 证书来做签名与公证；这一步无法在没有证书的情况下完全自动化
+- Windows 安装包建议在 Windows 主机上直接构建，再补充代码签名证书以减少系统安全提示
+
 ## 路由说明
 
 当前项目的核心路由定义位于 `src/router/routes.js`。
@@ -214,6 +381,26 @@ npm run format
 ```bash
 VITE_API_BASE_URL=/api
 ```
+
+开发环境如果使用相对地址 `/api`，会通过 Vite proxy 转发到 `API_PROXY_TARGET`：
+
+```bash
+VITE_API_BASE_URL=/api
+API_PROXY_TARGET=http://localhost:3000
+```
+
+打包后的桌面端没有 Vite proxy，因此 `pre/prod` 桌面环境必须配置完整后端地址：
+
+```bash
+VITE_API_BASE_URL=https://api.example.com/api
+```
+
+当前环境文件分工：
+
+- 网页开发默认读取 `.env`
+- 网页测试/预发/生产分别读取 `.env.test`、`.env.pre`、`.env.production`
+- 桌面开发/测试/预发/生产分别读取 `.env.desktop-dev`、`.env.desktop-test`、`.env.desktop-pre`、`.env.desktop-prod`
+- 本机私有地址可放在对应的 `.local` 文件中，例如 `.env.local`、`.env.desktop-dev.local`，这些文件会被 git 忽略
 
 ### 当前 API 模块
 
