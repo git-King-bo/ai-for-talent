@@ -151,18 +151,27 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, nextTick } from 'vue'
+import { computed, ref, onBeforeUnmount, onMounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
-import * as echarts from 'echarts'
+import { normalizeTalentPool } from '@/utils/talent'
 import rawTalentPool from './mockTalentPool.json'
 
 const route = useRoute()
 const isGenerating = ref(true)
 const radarChartRef = ref(null)
 const growthChartRef = ref(null)
+const normalizedTalentPool = normalizeTalentPool(rawTalentPool)
+let echarts = null
+let radarChart = null
+let growthChart = null
+let handleRadarResize = null
+let handleGrowthResize = null
 
 const selectedTalent = computed(
-  () => rawTalentPool.find((talent) => talent.id === route.query.id) ?? rawTalentPool[0] ?? null,
+  () =>
+    normalizedTalentPool.find((talent) => talent.id === route.query.id) ??
+    normalizedTalentPool[0] ??
+    null,
 )
 
 const roleCardBadge = computed(() =>
@@ -232,9 +241,15 @@ const marketYears = ['落地验证', '客户扩张', '产业协同']
 const marketValues = [72, 84, 91]
 
 // 初始化ECharts图表
-const initCharts = () => {
+const initCharts = async () => {
+  if (!echarts) {
+    const chartModule = await import('@/utils/echarts')
+    echarts = chartModule.default
+  }
+
   if (radarChartRef.value) {
-    const radarChart = echarts.init(radarChartRef.value)
+    radarChart?.dispose()
+    radarChart = echarts.init(radarChartRef.value)
     radarChart.setOption({
       backgroundColor: 'transparent',
       radar: {
@@ -263,11 +278,16 @@ const initCharts = () => {
       ],
       tooltip: { trigger: 'item', backgroundColor: 'rgba(10,20,40,0.9)', borderColor: '#5f8aff' },
     })
-    window.addEventListener('resize', () => radarChart.resize())
+
+    handleRadarResize?.()
+    const onResize = () => radarChart?.resize()
+    window.addEventListener('resize', onResize)
+    handleRadarResize = () => window.removeEventListener('resize', onResize)
   }
 
   if (growthChartRef.value) {
-    const growthChart = echarts.init(growthChartRef.value)
+    growthChart?.dispose()
+    growthChart = echarts.init(growthChartRef.value)
     growthChart.setOption({
       tooltip: {
         trigger: 'axis',
@@ -320,7 +340,11 @@ const initCharts = () => {
         },
       ],
     })
-    window.addEventListener('resize', () => growthChart.resize())
+
+    handleGrowthResize?.()
+    const onResize = () => growthChart?.resize()
+    window.addEventListener('resize', onResize)
+    handleGrowthResize = () => window.removeEventListener('resize', onResize)
   }
 }
 
@@ -333,10 +357,19 @@ onMounted(() => {
     const delay = Math.max(0, minDisplayTime - elapsed)
     setTimeout(() => {
       isGenerating.value = false
-      nextTick(() => initCharts())
+      nextTick(() => {
+        void initCharts()
+      })
     }, delay)
   }
   finishLoading()
+})
+
+onBeforeUnmount(() => {
+  handleRadarResize?.()
+  handleGrowthResize?.()
+  radarChart?.dispose()
+  growthChart?.dispose()
 })
 </script>
 

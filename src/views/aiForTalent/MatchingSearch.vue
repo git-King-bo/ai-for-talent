@@ -1,10 +1,12 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { normalizeTalentPool } from '@/utils/talent'
 import rawTalentPool from './mockTalentPool.json'
 
 const route = useRoute()
 const router = useRouter()
+const baseTalentPool = normalizeTalentPool(rawTalentPool)
 
 const radarSlots = [
   { x: 69, y: 28 },
@@ -18,14 +20,7 @@ const radarSlots = [
 const activeRole = computed(() => (route.query.role === 'investor' ? 'investor' : 'founder'))
 
 const normalizedPool = computed(() =>
-  [...rawTalentPool]
-    .sort((left, right) => right.matchScore - left.matchScore)
-    .map((talent, index) => ({
-      ...talent,
-      avatar: talent.avatar || `https://picsum.photos/200/300?random=${index + 1}`,
-      initial:
-        talent.name?.trim()?.charAt(0)?.toUpperCase() || talent.organization?.charAt(0) || '?',
-    })),
+  [...baseTalentPool].sort((left, right) => right.matchScore - left.matchScore),
 )
 
 const centerProfile = computed(() => {

@@ -48,7 +48,7 @@
 npm install
 ```
 
-### 2. 启动开发环境
+### 2. 启动 Web 开发环境
 
 ```bash
 npm run dev
@@ -61,19 +61,54 @@ npm run dev
 
 启动后可通过本机或局域网地址访问项目。
 
-### 3. 打包生产环境
+### 3. 打包 Web 生产环境
 
 ```bash
 npm run build
 ```
 
-### 4. 本地预览打包结果
+### 4. 本地预览 Web 打包结果
 
 ```bash
 npm run preview
 ```
 
-### 5. 代码格式化
+### 5. 启动 Electron 开发环境
+
+```bash
+npm run dev:electron
+```
+
+该命令会并行启动：
+
+- `Vite` 渲染进程开发服务器
+- `Electron` 主进程，并在 `http://127.0.0.1:8066` 可用后自动拉起桌面窗口
+
+### 6. 预览桌面版渲染结果
+
+```bash
+npm run preview:electron
+```
+
+该命令会先执行一次 `vite build`，然后由 `Electron` 直接加载本地 `dist/` 产物，适合验证桌面端生产路径、资源引用和路由行为。
+
+### 7. 生成 Electron 安装包
+
+```bash
+npm run dist:electron
+```
+
+如需只验证打包目录结构、不生成最终安装包，可使用：
+
+```bash
+npm run pack:electron
+```
+
+默认产物输出到：
+
+- `release/`
+
+### 8. 代码格式化
 
 ```bash
 npm run format
@@ -214,6 +249,39 @@ npm run format
 ```bash
 VITE_API_BASE_URL=/api
 ```
+
+对于打包后的 Electron 桌面版，建议改为绝对地址，例如：
+
+```bash
+VITE_API_BASE_URL=https://api.example.com
+```
+
+仓库已提供 `.env.example` 作为示例。
+
+## Electron 桌面化说明
+
+当前分支已新增一套独立的 Electron 生产配置，关键点包括：
+
+- 独立主进程入口：`electron/main.js`
+- 预加载桥接：`electron/preload.js`
+- 打包配置：`electron-builder.yml`
+- 单实例锁，避免重复启动多个桌面进程
+- `contextIsolation: true`、`sandbox: true`、`nodeIntegration: false`
+- 禁止渲染进程主动申请系统权限
+- 禁止在应用内直接打开不受信任的新窗口
+- Vite 构建 `base` 调整为相对路径，兼容本地文件加载
+- 路由在桌面生产环境自动切换到 `hash` 模式，避免 `file://` 下刷新失效
+- 本地公共资源路径统一兼容桌面端
+- 远程头像兜底为本地生成占位图，避免离线空白
+
+首次在新环境执行 Electron 相关命令时，`electron` 与 `electron-builder` 可能需要联网下载对应平台的运行时或打包二进制。
+
+如果后续要继续增强桌面能力，推荐优先从以下方向扩展：
+
+- 通过 `ipcMain` / `ipcRenderer` 接入本地文件系统或系统菜单能力
+- 增加应用图标（`.icns` / `.ico` / `.png`）与签名配置
+- 接入自动更新、日志采集和崩溃上报
+- 为生产环境拆分 `.env.production` 与桌面端专用环境变量
 
 ### 当前 API 模块
 

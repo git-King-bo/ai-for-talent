@@ -7,6 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [
     tailwindcss(),
     vue(),
@@ -20,5 +21,6 @@ export default defineConfig({
   server: {
     host: true,
     port: 8066,
+    strictPort: true,
   },
 })

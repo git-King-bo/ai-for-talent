@@ -38,9 +38,27 @@ async function parseResponse(response) {
   return response.blob()
 }
 
+function resolveBaseURL(customBaseURL) {
+  if (customBaseURL) {
+    return customBaseURL
+  }
+
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL
+  }
+
+  if (typeof window !== 'undefined' && window.location.protocol === 'file:') {
+    console.warn(
+      '[http] Missing VITE_API_BASE_URL for the packaged desktop app. Configure an absolute API endpoint before enabling live requests.',
+    )
+  }
+
+  return '/api'
+}
+
 class HttpClient {
   constructor(options = {}) {
-    this.baseURL = options.baseURL || import.meta.env.VITE_API_BASE_URL || '/api'
+    this.baseURL = resolveBaseURL(options.baseURL)
     this.timeout = options.timeout || DEFAULT_TIMEOUT
     this.requestInterceptors = []
     this.responseInterceptors = []

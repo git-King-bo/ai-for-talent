@@ -1,11 +1,21 @@
 {
   "name": "talentai",
   "version": "0.0.0",
+  "description": "AI for Talent desktop app powered by Vue 3, Vite, and Electron.",
+  "author": "AI for Talent Team",
   "private": true,
   "type": "module",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
+    "dev:web": "vite",
+    "dev:electron": "concurrently -k \"npm:dev:web\" \"npm:dev:electron:main\"",
+    "dev:electron:main": "wait-on tcp:127.0.0.1:8066 && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:8066 node electron/launch.js .",
     "build": "vite build",
+    "build:web": "vite build",
+    "preview:electron": "npm run build:web && node electron/launch.js .",
+    "pack:electron": "npm run build:web && cross-env ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder --dir",
+    "dist:electron": "npm run build:web && cross-env ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder",
     "preview": "vite preview",
     "format": "prettier --write --experimental-cli src/"
   },
@@ -20,9 +30,14 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.6",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^41.3.0",
+    "electron-builder": "^26.8.1",
     "prettier": "3.8.3",
     "vite": "^8.0.8",
-    "vite-plugin-vue-devtools": "^8.1.1"
+    "vite-plugin-vue-devtools": "^8.1.1",
+    "wait-on": "^9.0.5"
   },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"

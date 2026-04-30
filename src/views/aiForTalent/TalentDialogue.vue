@@ -1,10 +1,12 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { normalizeTalentPool } from '@/utils/talent'
 import rawTalentPool from './mockTalentPool.json'
 
 const route = useRoute()
 const router = useRouter()
+const baseTalentPool = normalizeTalentPool(rawTalentPool)
 const scrollEl = ref(null)
 const draft = ref('')
 const isReplying = ref(false)
@@ -13,7 +15,7 @@ const replyCursor = ref(0)
 let replyTimer = null
 
 const talentPool = computed(() =>
-  [...rawTalentPool].sort((left, right) => right.matchScore - left.matchScore),
+  [...baseTalentPool].sort((left, right) => right.matchScore - left.matchScore),
 )
 
 const activeTalentId = computed(() => route.query.id ?? talentPool.value[0]?.id ?? null)

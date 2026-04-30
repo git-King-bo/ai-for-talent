@@ -1,8 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { appRoutes } from './routes'
 
+const isFileProtocol =
+  typeof window !== 'undefined' && window.location.protocol === 'file:'
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: isFileProtocol ? createWebHashHistory() : createWebHistory(import.meta.env.BASE_URL),
   routes: appRoutes,
   scrollBehavior() {
     return { top: 0 }
