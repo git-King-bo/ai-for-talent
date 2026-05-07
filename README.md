@@ -1,393 +1,149 @@
-# AI for Talent
+# Electron Launchpad
 
-`AI for Talent` 是一个基于 `Vue 3 + Vite` 构建的前端项目，当前主要用于展示 AI 驱动的人才匹配与智能创投交互流程。项目包含首页体验流、人才匹配、对话模拟、智能总结等页面，也保留了工作台、人才库、职位管理等后台式页面结构。
+`Electron Launchpad` 是一个面向二次开发的 Electron 桌面模板：保留了生产环境常用的主进程安全设置、预加载桥接、Vite 渲染链路和安装包配置，同时把原先强业务化的演示页面清理成更通用的工作台 demo。
 
-## 项目简介
+## 适合用来做什么
 
-当前项目以“AI for Talent / 智能创投”体验链路为核心，首页支持从角色选择开始，逐步进入场景问答、AI 对话与画像分析，再延展到匹配推荐、对话详情和总结报告页面。
+- 作为新的 Electron 项目起步仓
+- 快速嵌入已有 Vue 页面或后台系统
+- 先用浏览器开发，再切回 Electron 验证桌面行为
+- 在安全的 preload 模式下逐步增加本地文件、菜单、系统能力
 
-主要特点：
+## 当前保留的生产级基础
 
-- 基于 `Vue 3 Composition API` 开发
-- 使用 `Vite` 作为构建工具
-- 使用 `Vue Router` 管理页面路由
-- 集成 `Pinia`，为状态管理预留能力
-- 使用 `Tailwind CSS v4` 与 `Sass` 组织样式
-- 使用 `ECharts` 展示图表数据
-- 内置基础 HTTP 请求封装，支持请求/响应拦截
-- 当前部分页面使用本地 JSON Mock 数据进行展示
-
-## 技术栈
-
-- `Vue 3`
-- `Vite`
-- `Vue Router`
-- `Pinia`
-- `Tailwind CSS 4`
-- `Sass`
-- `ECharts`
-- `Prettier`
-
-## 运行环境
-
-根据项目 `package.json`，推荐使用以下 Node.js 版本：
-
-- `Node.js ^20.19.0`
-- 或 `Node.js >=22.12.0`
-
-建议搭配：
-
-- `npm` 作为包管理工具
-- `VS Code` 作为开发 IDE
-
-## 安装与启动
-
-### 1. 安装依赖
-
-```bash
-npm install
-```
-
-### 2. 启动 Web 开发环境
-
-```bash
-npm run dev
-```
-
-默认开发服务器配置在 `vite.config.js` 中：
-
-- 监听地址：`0.0.0.0`
-- 端口：`8066`
-
-启动后可通过本机或局域网地址访问项目。
-
-### 3. 打包 Web 生产环境
-
-```bash
-npm run build
-```
-
-### 4. 本地预览 Web 打包结果
-
-```bash
-npm run preview
-```
-
-### 5. 启动 Electron 开发环境
-
-```bash
-npm run dev:electron
-```
-
-该命令会并行启动：
-
-- `Vite` 渲染进程开发服务器
-- `Electron` 主进程，并在 `http://127.0.0.1:8066` 可用后自动拉起桌面窗口
-
-### 6. 预览桌面版渲染结果
-
-```bash
-npm run preview:electron
-```
-
-该命令会先执行一次 `vite build`，然后由 `Electron` 直接加载本地 `dist/` 产物，适合验证桌面端生产路径、资源引用和路由行为。
-
-### 7. 生成 Electron 安装包
-
-```bash
-npm run dist:electron
-```
-
-如需只验证打包目录结构、不生成最终安装包，可使用：
-
-```bash
-npm run pack:electron
-```
-
-默认产物输出到：
-
-- `release/`
-
-### 8. 代码格式化
-
-```bash
-npm run format
-```
-
-当前格式化脚本仅针对 `src/` 目录执行。
-
-## 路由说明
-
-当前项目的核心路由定义位于 `src/router/routes.js`。
-
-### AI for Talent 体验链路
-
-- `/`
-  首页入口，指向 `src/views/aiForTalent/index.vue`
-- `/AiForTalent`
-  首页别名，与 `/` 指向同一页面
-- `/MatchingSearch`
-  人才匹配页面
-- `/TalentDialogue`
-  人才对话页面
-- `/IntelligentSummary`
-  智能总结页面
-
-### 预留的后台式页面
-
-以下页面已定义为 `layoutChildrenRoutes`，但当前默认入口路由已被注释，暂未作为主导航流程启用：
-
-- `dashboard`
-  工作台
-- `talent`
-  人才库
-- `jobs`
-  职位管理
-
-## 页面结构概览
-
-### 1. 首页体验页
-
-文件：`src/views/aiForTalent/index.vue`
-
-首页是整个产品体验的主入口，内部采用步骤式切换，主要包含：
-
-- 角色选择
-- 场景问答
-- AI 面谈对话
-- 画像分析
-
-### 2. 人才匹配页
-
-文件：`src/views/aiForTalent/MatchingSearch.vue`
-
-用于展示推荐对象列表、匹配度和后续操作入口。
-
-### 3. 人才对话页
-
-文件：`src/views/aiForTalent/TalentDialogue.vue`
-
-模拟用户与目标人才/投资人的对话过程，当前结合本地 Mock 数据生成初始消息与回复节奏。
-
-### 4. 智能总结页
-
-文件：`src/views/aiForTalent/IntelligentSummary.vue`
-
-展示对话总结、数据看板、后续行动建议及图表分析。
+- `Electron + Vue 3 + Vite` 桌面渲染链路
+- `contextIsolation + sandbox + nodeIntegration: false`
+- `preload` 桥接层，避免渲染进程直接拿 Node 权限
+- 单实例应用控制
+- 外链跳转白名单与导航拦截
+- `electron-builder` 的 macOS / Windows / Linux 打包配置
+- 文件协议下自动切换 `hash history`
 
 ## 目录结构
 
 ```text
 .
+├── electron
+│   ├── launch.js
+│   ├── main.js
+│   └── preload.js
+├── public
+│   └── favicon.ico
 ├── src
 │   ├── api
 │   │   ├── http.js
-│   │   ├── index.js
-│   │   └── modules
+│   │   └── index.js
 │   ├── assets
-│   ├── components
-│   │   ├── aiFortalent
-│   │   ├── StarfieldBackground.vue
-│   │   └── TalentBg.vue
+│   │   ├── base.css
+│   │   └── main.css
 │   ├── layouts
+│   │   ├── components
+│   │   └── index.vue
 │   ├── router
+│   │   ├── index.js
+│   │   └── routes.js
 │   ├── utils
+│   │   └── desktop.js
 │   └── views
-│       ├── aiForTalent
-│       ├── dashboard
-│       ├── jobs
-│       └── talent
+│       ├── desktop
+│       └── NotFoundView.vue
+├── electron-builder.yml
 ├── package.json
-├── vite.config.js
-└── README.md
+└── vite.config.js
 ```
 
-目录说明：
+## 启动方式
 
-- `src/views/aiForTalent`
-  AI for Talent 主业务页面
-- `src/components/aiFortalent`
-  首页体验链路相关组件
-- `src/router`
-  路由配置
-- `src/api`
-  接口请求封装与模块化 API
-- `src/layouts`
-  后台式布局结构
-- `src/assets`
-  全局样式与静态资源
-- `src/utils`
-  工具函数
-
-## 接口与数据说明
-
-### HTTP 封装
-
-项目内置了一个轻量级请求封装，位于：
-
-- `src/api/http.js`
-
-能力包括：
-
-- 支持 `GET / POST / PUT / DELETE`
-- 自动拼接查询参数
-- 默认超时时间为 `10000ms`
-- 支持请求拦截器和响应拦截器
-- 默认从 `localStorage` 中读取 `token` 并注入 `Authorization` 请求头
-- 默认处理常见业务返回结构：当返回对象中存在 `code` 字段时，仅将 `code` 为 `0` 或 `200` 视为成功
-
-### API Base URL
-
-请求基础地址优先级如下：
-
-1. `options.baseURL`
-2. `import.meta.env.VITE_API_BASE_URL`
-3. 默认值 `/api`
-
-如果接入真实后端，建议在环境变量中配置：
+### 安装依赖
 
 ```bash
-VITE_API_BASE_URL=/api
+npm install
 ```
 
-对于打包后的 Electron 桌面版，建议改为绝对地址，例如：
+### 仅启动 Web 调试
+
+```bash
+npm run dev
+```
+
+默认地址为 `http://127.0.0.1:8066`。
+
+### 启动 Electron 开发环境
+
+```bash
+npm run dev:electron
+```
+
+这会先启动 Vite，再由 Electron 连接本地开发服务器。
+
+### 预览生产渲染结果
+
+```bash
+npm run preview:electron
+```
+
+### 生成安装包
+
+```bash
+npm run dist:electron
+```
+
+国内镜像版：
+
+```bash
+npm run dist:electron:cn
+```
+
+只检查打包目录结构时可使用：
+
+```bash
+npm run pack:electron
+```
+
+打包前清理缓存：
+
+```bash
+npm run clean:electron
+```
+
+### 代码格式化
+
+```bash
+npm run format
+```
+
+## 后续嵌套项目的推荐方式
+
+### 方式 1：直接替换 `src/views/desktop`
+
+适合把现有 Vue 页面逐步迁进来。保留 `electron/` 与 `src/layouts/`，替换路由和页面即可。
+
+### 方式 2：保留模板布局，只替换主工作区
+
+适合需要公共导航、系统信息页、桌面能力面板的后台系统。你可以把业务页面挂到 `src/router/routes.js` 的子路由里。
+
+### 方式 3：继续扩充 preload / IPC
+
+需要文件读写、系统菜单、窗口控制、本地数据库时：
+
+1. 在 `electron/main.js` 注册新的 `ipcMain.handle`
+2. 在 `electron/preload.js` 暴露安全 API
+3. 在 `src/utils/desktop.js` 中封装调用
+4. 在渲染层页面中消费这些 API
+
+## 关键入口
+
+- Electron 主进程：[electron/main.js](/Users/yuanshu/Desktop/webui/ai-for-talent/electron/main.js:1)
+- Preload 桥接：[electron/preload.js](/Users/yuanshu/Desktop/webui/ai-for-talent/electron/preload.js:1)
+- 路由配置：[src/router/routes.js](/Users/yuanshu/Desktop/webui/ai-for-talent/src/router/routes.js:1)
+- 桌面 API 封装：[src/utils/desktop.js](/Users/yuanshu/Desktop/webui/ai-for-talent/src/utils/desktop.js:1)
+
+## 环境变量
+
+如需对接后端接口，可在 `.env` 中配置：
 
 ```bash
 VITE_API_BASE_URL=https://api.example.com
 ```
 
-仓库已提供 `.env.example` 作为示例。
-
-## Electron 桌面化说明
-
-当前分支已新增一套独立的 Electron 生产配置，关键点包括：
-
-- 独立主进程入口：`electron/main.js`
-- 预加载桥接：`electron/preload.js`
-- 打包配置：`electron-builder.yml`
-- 单实例锁，避免重复启动多个桌面进程
-- `contextIsolation: true`、`sandbox: true`、`nodeIntegration: false`
-- 禁止渲染进程主动申请系统权限
-- 禁止在应用内直接打开不受信任的新窗口
-- Vite 构建 `base` 调整为相对路径，兼容本地文件加载
-- 路由在桌面生产环境自动切换到 `hash` 模式，避免 `file://` 下刷新失效
-- 本地公共资源路径统一兼容桌面端
-- 远程头像兜底为本地生成占位图，避免离线空白
-
-首次在新环境执行 Electron 相关命令时，`electron` 与 `electron-builder` 可能需要联网下载对应平台的运行时或打包二进制。
-
-如果后续要继续增强桌面能力，推荐优先从以下方向扩展：
-
-- 通过 `ipcMain` / `ipcRenderer` 接入本地文件系统或系统菜单能力
-- 增加应用图标（`.icns` / `.ico` / `.png`）与签名配置
-- 接入自动更新、日志采集和崩溃上报
-- 为生产环境拆分 `.env.production` 与桌面端专用环境变量
-
-### 当前 API 模块
-
-- `src/api/modules/dashboard.js`
-- `src/api/modules/talent.js`
-
-目前已经抽象出示例接口：
-
-- `getDashboardSummary`
-- `getTalentList`
-- `createTalent`
-
-### Mock 数据
-
-部分 AI for Talent 页面当前依赖本地数据进行展示：
-
-- `src/views/aiForTalent/mockTalentPool.json`
-
-如果后续切换到真实接口，建议优先替换这一层数据来源。
-
-## 开发说明
-
-### 别名配置
-
-项目已在 `vite.config.js` 中配置路径别名：
-
-- `@` -> `src`
-
-示例：
-
-```js
-import router from '@/router'
-```
-
-### 全局入口
-
-项目入口文件：
-
-- `src/main.js`
-
-当前已注册：
-
-- `Pinia`
-- `Vue Router`
-
-### 根组件
-
-根组件位于：
-
-- `src/App.vue`
-
-当前会渲染全局背景组件，并通过 `<RouterView />` 承载页面。
-
-## 开发建议
-
-- 新增业务页面时，优先放在 `src/views` 下，并在 `src/router/routes.js` 中注册
-- 可复用组件建议放在 `src/components`，避免在页面中堆积过多逻辑
-- 如果后续接口数量增加，建议继续按业务域拆分 `src/api/modules`
-- 若需要统一鉴权、错误提示或埋点逻辑，可以在 `src/api/http.js` 的拦截器中扩展
-- 当前项目尚未看到测试脚本，如需增强稳定性，建议补充单元测试或端到端测试
-
-## 已知现状
-
-- 当前默认首页为 AI for Talent 体验页
-- `/` 与 `/AiForTalent` 已同时指向首页
-- 后台式布局路由已保留，但默认入口暂未启用
-- 一部分页面是演示型页面，内容包含静态数据与本地 Mock 数据
-
-## 常见问题
-
-### 1. 为什么访问首页会进入 AI for Talent 页面？
-
-因为当前主入口路由已设置为：
-
-- `/`
-- `/AiForTalent`
-
-两者都会加载 `src/views/aiForTalent/index.vue`。
-
-### 2. 如何切回后台布局首页？
-
-可以重新启用 `src/router/routes.js` 中原先注释掉的布局路由：
-
-```js
-{
-  path: '/',
-  component: () => import('@/layouts/index.vue'),
-  redirect: '/dashboard',
-  children: layoutChildrenRoutes,
-}
-```
-
-启用前建议先确认是否仍需要保留 AI for Talent 作为默认首页。
-
-### 3. 项目现在是纯前端吗？
-
-从当前代码结构看，项目以前端展示为主，API 层已预留，但部分核心页面仍使用本地 Mock 数据驱动。
-
-## 后续可扩展方向
-
-- 接入真实登录与权限体系
-- 将 AI for Talent 流程中的静态数据替换为后端接口
-- 为匹配页、对话页、总结页增加真实业务状态管理
-- 为后台工作台、人才库、职位管理恢复完整导航入口
-- 增加测试、CI 和部署说明
-
-## License
-
-当前仓库未在 `package.json` 或根目录中看到明确 License 声明。如需开源或对外分发，建议补充许可证文件。
+对于桌面打包产物，建议使用绝对地址，而不是依赖相对 `/api`。

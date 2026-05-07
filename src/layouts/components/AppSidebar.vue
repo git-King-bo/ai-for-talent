@@ -23,10 +23,10 @@ const isActive = (path) => route.path === path
 <template>
   <aside class="sidebar">
     <div class="sidebar__brand">
-      <div class="sidebar__logo">AI</div>
+      <div class="sidebar__logo">EL</div>
       <div>
-        <p class="sidebar__eyebrow">Vue3 Admin Scaffold</p>
-        <h1>Talent Console</h1>
+        <p class="sidebar__eyebrow">Electron Template</p>
+        <h1>Launchpad</h1>
       </div>
     </div>
 
@@ -47,8 +47,8 @@ const isActive = (path) => route.path === path
     </nav>
 
     <div class="sidebar__footer">
-      <span>基础模块</span>
-      <strong>Layout / Router / API</strong>
+      <span>Foundation</span>
+      <strong>Shell / Router / IPC / Build</strong>
     </div>
   </aside>
 </template>
@@ -60,9 +60,10 @@ const isActive = (path) => route.path === path
   display: flex;
   flex-direction: column;
   gap: 24px;
-  border-right: 1px solid rgba(33, 39, 55, 0.08);
-  background: rgba(20, 23, 31, 0.9);
-  color: #f7f1e8;
+  border-right: 1px solid var(--color-line);
+  background:
+    linear-gradient(180deg, rgba(31, 24, 19, 0.96), rgba(20, 15, 13, 0.94)), rgba(20, 15, 13, 0.9);
+  color: var(--color-text);
   backdrop-filter: blur(18px);
 }
 
@@ -78,23 +79,24 @@ const isActive = (path) => route.path === path
   border-radius: 16px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #ffb165 0%, #f46b45 100%);
-  color: #20150d;
+  background: linear-gradient(135deg, #f8c78b 0%, #eb7e36 100%);
+  color: #24160e;
   font-size: 20px;
   font-weight: 700;
-  box-shadow: 0 18px 36px rgba(244, 107, 69, 0.25);
+  box-shadow: 0 18px 36px rgba(235, 126, 54, 0.25);
 }
 
 .sidebar__eyebrow {
   margin-bottom: 4px;
-  color: rgba(247, 241, 232, 0.62);
+  color: var(--color-text-muted);
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .sidebar__brand h1 {
-  font-size: 24px;
+  font-family: var(--font-display);
+  font-size: 27px;
   font-weight: 700;
 }
 
@@ -120,13 +122,13 @@ const isActive = (path) => route.path === path
 
 .sidebar__link:hover {
   transform: translateX(4px);
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 244, 233, 0.04);
+  border-color: var(--color-line);
 }
 
 .sidebar__link.is-active {
-  background: linear-gradient(135deg, rgba(255, 177, 101, 0.18), rgba(244, 107, 69, 0.08));
-  border-color: rgba(255, 177, 101, 0.24);
+  background: linear-gradient(135deg, rgba(245, 191, 123, 0.16), rgba(124, 146, 255, 0.08));
+  border-color: rgba(245, 191, 123, 0.24);
 }
 
 .sidebar__badge {
@@ -136,7 +138,7 @@ const isActive = (path) => route.path === path
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 244, 233, 0.08);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -154,7 +156,7 @@ const isActive = (path) => route.path === path
 }
 
 .sidebar__meta small {
-  color: rgba(247, 241, 232, 0.62);
+  color: var(--color-text-muted);
   line-height: 1.5;
 }
 
@@ -162,14 +164,14 @@ const isActive = (path) => route.path === path
   margin-top: auto;
   padding: 18px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 244, 233, 0.05);
+  border: 1px solid var(--color-line);
 }
 
 .sidebar__footer span {
   display: block;
   margin-bottom: 6px;
-  color: rgba(247, 241, 232, 0.62);
+  color: var(--color-text-muted);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;

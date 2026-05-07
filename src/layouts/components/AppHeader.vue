@@ -1,11 +1,13 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { getRuntimeBadge } from '@/utils/desktop'
 
 const route = useRoute()
 
 const title = computed(() => route.meta?.title ?? '工作台')
 const description = computed(() => route.meta?.description ?? '开始构建你的业务页面。')
+const runtimeBadge = getRuntimeBadge()
 const today = computed(() =>
   new Intl.DateTimeFormat('zh-CN', {
     month: 'long',
@@ -17,8 +19,11 @@ const today = computed(() =>
 
 <template>
   <header class="app-header">
-    <div>
-      <p class="app-header__date">{{ today }}</p>
+    <div class="app-header__copy">
+      <div class="app-header__meta-row">
+        <p class="app-header__date">{{ today }}</p>
+        <span class="app-header__runtime">{{ runtimeBadge }}</span>
+      </div>
       <h2>{{ title }}</h2>
       <p class="app-header__description">{{ description }}</p>
     </div>
@@ -26,11 +31,11 @@ const today = computed(() =>
     <div class="app-header__panel">
       <div class="app-header__status">
         <span class="dot"></span>
-        路由与布局已接入
+        Electron shell online
       </div>
       <div class="app-header__user">
-        <strong>Admin</strong>
-        <span>Project Owner</span>
+        <strong>Launchpad</strong>
+        <span>Ready for your app</span>
       </div>
     </div>
   </header>
@@ -38,33 +43,55 @@ const today = computed(() =>
 
 <style scoped>
 .app-header {
-  padding: 28px 32px 20px;
+  padding: 30px 32px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
 
+.app-header__copy {
+  min-width: 0;
+}
+
+.app-header__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
 .app-header__date {
-  margin-bottom: 8px;
-  color: rgba(201, 218, 255, 0.72);
+  color: var(--color-text-muted);
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+.app-header__runtime {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 191, 123, 0.2);
+  background: rgba(245, 191, 123, 0.08);
+  color: var(--color-accent-soft);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .app-header h2 {
-  color: #f5f8ff;
+  color: var(--color-text);
+  font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 38px);
   line-height: 1.1;
   font-weight: 700;
-  text-shadow: 0 6px 18px rgba(1, 7, 18, 0.4);
+  letter-spacing: 0.01em;
 }
 
 .app-header__description {
   margin-top: 10px;
   max-width: 640px;
-  color: rgba(201, 218, 255, 0.74);
+  color: var(--color-text-soft);
 }
 
 .app-header__panel {
@@ -77,9 +104,9 @@ const today = computed(() =>
 .app-header__user {
   padding: 14px 16px;
   border-radius: 18px;
-  background: rgba(7, 14, 28, 0.6);
-  border: 1px solid rgba(191, 218, 255, 0.12);
-  box-shadow: 0 18px 34px rgba(2, 8, 20, 0.26);
+  background: var(--color-panel-muted);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-panel);
   backdrop-filter: blur(14px);
 }
 
@@ -87,7 +114,7 @@ const today = computed(() =>
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #dce7fa;
+  color: var(--color-text);
   font-size: 14px;
   white-space: nowrap;
 }
@@ -96,8 +123,8 @@ const today = computed(() =>
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #3dcf8e;
-  box-shadow: 0 0 0 6px rgba(61, 207, 142, 0.15);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 6px rgba(235, 126, 54, 0.14);
 }
 
 .app-header__user strong,
@@ -106,13 +133,13 @@ const today = computed(() =>
 }
 
 .app-header__user strong {
-  color: #f4f8ff;
+  color: var(--color-text);
   font-size: 15px;
   font-weight: 700;
 }
 
 .app-header__user span {
-  color: rgba(201, 218, 255, 0.68);
+  color: var(--color-text-muted);
   font-size: 13px;
 }
 

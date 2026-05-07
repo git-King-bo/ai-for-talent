@@ -1,12 +1,14 @@
 {
-  "name": "talentai",
+  "name": "electron-launchpad-demo",
   "version": "0.0.0",
-  "description": "AI for Talent desktop app powered by Vue 3, Vite, and Electron.",
-  "author": "AI for Talent Team",
+  "description": "Production-ready Electron demo powered by Vue 3, Vite, and a secure preload bridge.",
+  "author": "Launchpad Team",
   "private": true,
   "type": "module",
   "main": "electron/main.js",
   "scripts": {
+    "clean:electron": "node scripts/clean-electron-build.mjs",
+    "prepare:electron-build": "node scripts/prepare-electron-build.mjs",
     "dev": "vite",
     "dev:web": "vite",
     "dev:electron": "concurrently -k \"npm:dev:web\" \"npm:dev:electron:main\"",
@@ -14,16 +16,15 @@
     "build": "vite build",
     "build:web": "vite build",
     "preview:electron": "npm run build:web && node electron/launch.js .",
-    "pack:electron": "npm run build:web && cross-env ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder --dir",
-    "dist:electron": "npm run build:web && cross-env ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder",
+    "pack:electron": "npm run clean:electron && npm run prepare:electron-build && npm run build:web && cross-env ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder --dir",
+    "pack:electron:cn": "npm run clean:electron && npm run prepare:electron-build && npm run build:web && cross-env ELECTRON_BUILDER_BINARIES_MIRROR=https://registry.npmmirror.com/-/binary/electron-builder-binaries/ ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder --dir",
+    "dist:electron": "npm run clean:electron && npm run prepare:electron-build && npm run build:web && cross-env ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder",
+    "dist:electron:cn": "npm run clean:electron && npm run prepare:electron-build && npm run build:web && cross-env ELECTRON_BUILDER_BINARIES_MIRROR=https://registry.npmmirror.com/-/binary/electron-builder-binaries/ ELECTRON_BUILDER_CACHE=.cache/electron-builder ELECTRON_CACHE=.cache/electron electron-builder",
     "preview": "vite preview",
-    "format": "prettier --write --experimental-cli src/"
+    "format": "prettier --write --experimental-cli \"{src,electron}/**/*.{js,vue,css,yml,json,md}\""
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.3",
-    "echarts": "^6.0.0",
-    "pinia": "^3.0.4",
-    "sass": "^1.99.0",
     "tailwindcss": "^4.2.3",
     "vue": "^3.5.32",
     "vue-router": "^5.0.4"

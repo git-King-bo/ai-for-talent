@@ -16,6 +16,9 @@ release
 .cache
 *.local
 *.blockmap
+.tauri
+src-tauri
+target
 
 # Editor directories and files
 .vscode/*

@@ -1,4 +1,5 @@
 import electronMain from 'electron/main'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -72,10 +73,10 @@ function createMainWindow() {
     height: 920,
     minWidth: 1200,
     minHeight: 760,
-    backgroundColor: '#020611',
+    backgroundColor: '#12100e',
     show: false,
     autoHideMenuBar: process.platform !== 'darwin',
-    title: 'AI for Talent',
+    title: 'Electron Launchpad',
     webPreferences: {
       preload: preloadPath,
       contextIsolation: true,
@@ -97,9 +98,21 @@ function createMainWindow() {
     }
   })
 
+  window.webContents.on('before-input-event', (event, input) => {
+    const isToggleDevToolsShortcut =
+      input.type === 'keyDown' &&
+      (input.key === 'F12' || ((input.control || input.meta) && input.shift && input.key.toUpperCase() === 'I'))
+
+    if (!isToggleDevToolsShortcut) {
+      return
+    }
+
+    event.preventDefault()
+    window.webContents.toggleDevTools()
+  })
+
   if (isDev && devServerUrl) {
     void window.loadURL(devServerUrl)
-    window.webContents.openDevTools({ mode: 'detach' })
   } else {
     void window.loadFile(rendererIndexPath)
   }
@@ -114,6 +127,30 @@ function registerIpcHandlers() {
     isPackaged: app.isPackaged,
     platform: process.platform,
   }))
+
+  ipcMain.handle('app:get-runtime-info', () => ({
+    name: app.getName(),
+    version: app.getVersion(),
+    isPackaged: app.isPackaged,
+    platform: process.platform,
+    arch: process.arch,
+    osRelease: os.release(),
+    electronVersion: process.versions.electron,
+    chromeVersion: process.versions.chrome,
+    nodeVersion: process.versions.node,
+    userDataPath: app.getPath('userData'),
+    logsPath: app.getPath('logs'),
+    homePath: app.getPath('home'),
+  }))
+
+  ipcMain.handle('shell:open-external', async (_event, targetUrl) => {
+    if (!canOpenExternally(targetUrl)) {
+      return false
+    }
+
+    await shell.openExternal(targetUrl)
+    return true
+  })
 }
 
 const hasSingleInstanceLock = app.requestSingleInstanceLock()
@@ -134,7 +171,8 @@ if (!hasSingleInstanceLock) {
   })
 
   app.whenReady().then(() => {
-    app.setAppUserModelId('com.aitalent.desktop')
+    app.setName('Electron Launchpad')
+    app.setAppUserModelId('com.example.electronlaunchpad')
     configureSessionSecurity()
     registerIpcHandlers()
     mainWindow = createMainWindow()

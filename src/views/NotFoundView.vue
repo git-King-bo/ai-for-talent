@@ -2,8 +2,8 @@
   <section class="not-found">
     <span>404</span>
     <h2>页面不存在</h2>
-    <p>当前地址没有匹配到页面，返回工作台继续开发吧。</p>
-    <RouterLink to="/dashboard">返回工作台</RouterLink>
+    <p>当前地址没有匹配到页面，回到 Launchpad 继续搭建你的桌面项目。</p>
+    <RouterLink to="/overview">返回概览</RouterLink>
   </section>
 </template>
 
@@ -15,11 +15,13 @@
   gap: 14px;
   padding: 24px;
   text-align: center;
-  background: linear-gradient(180deg, #f6f2ea 0%, #f7f8fc 100%);
+  background:
+    radial-gradient(circle at top, rgba(235, 126, 54, 0.18), transparent 28%),
+    linear-gradient(180deg, #17120f 0%, #0d0a08 100%);
 }
 
 .not-found span {
-  color: #8d735d;
+  color: var(--color-accent-soft);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -27,20 +29,22 @@
 }
 
 .not-found h2 {
-  color: #1f2430;
+  color: var(--color-text);
+  font-family: var(--font-display);
   font-size: 40px;
   font-weight: 700;
 }
 
 .not-found p {
-  color: #6f7280;
+  color: var(--color-text-soft);
 }
 
 .not-found a {
   justify-self: center;
   padding: 12px 18px;
   border-radius: 16px;
-  background: #1f2430;
-  color: #fff7ef;
+  background: linear-gradient(135deg, #f6c58a, #eb7e36);
+  color: #24160e;
+  font-weight: 700;
 }
 </style>

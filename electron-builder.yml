@@ -1,7 +1,9 @@
-appId: com.aitalent.desktop
-productName: AI for Talent
+appId: com.example.electronlaunchpad
+productName: Electron Launchpad
 directories:
   output: release
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/
 files:
   - dist/**/*
   - electron/**/*
@@ -12,7 +14,7 @@ buildDependenciesFromSource: false
 npmRebuild: false
 compression: maximum
 mac:
-  category: public.app-category.business
+  category: public.app-category.developer-tools
   target:
     - target: dmg
       arch:
@@ -24,7 +26,7 @@ win:
       arch:
         - x64
 linux:
-  category: Office
+  category: Development
   target:
     - target: AppImage
       arch:

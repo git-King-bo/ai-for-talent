@@ -1,8 +1,7 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { appRoutes } from './routes'
 
-const isFileProtocol =
-  typeof window !== 'undefined' && window.location.protocol === 'file:'
+const isFileProtocol = typeof window !== 'undefined' && window.location.protocol === 'file:'
 
 const router = createRouter({
   history: isFileProtocol ? createWebHashHistory() : createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +12,7 @@ const router = createRouter({
 })
 
 router.afterEach((to) => {
-  const title = to.meta?.title ? `${to.meta.title} | AI for Talent` : 'AI for Talent'
+  const title = to.meta?.title ? `${to.meta.title} | Electron Launchpad` : 'Electron Launchpad'
   document.title = title
 })
 

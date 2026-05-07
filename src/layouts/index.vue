@@ -20,9 +20,9 @@ import AppSidebar from './components/AppSidebar.vue'
   min-height: 100vh;
   display: flex;
   background:
-    radial-gradient(circle at 12% 6%, rgba(121, 184, 255, 0.12), transparent 20%),
-    radial-gradient(circle at 84% 0%, rgba(247, 179, 106, 0.08), transparent 18%),
-    linear-gradient(180deg, rgba(5, 10, 23, 0.26) 0%, rgba(4, 9, 20, 0.54) 100%);
+    radial-gradient(circle at 12% 6%, rgba(124, 146, 255, 0.12), transparent 20%),
+    radial-gradient(circle at 84% 0%, rgba(235, 126, 54, 0.08), transparent 18%),
+    linear-gradient(180deg, rgba(23, 18, 14, 0.38) 0%, rgba(12, 9, 8, 0.66) 100%);
 }
 
 .admin-layout__workspace {
@@ -30,7 +30,7 @@ import AppSidebar from './components/AppSidebar.vue'
   min-width: 0;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(6px);
 }
 
 @media (max-width: 960px) {

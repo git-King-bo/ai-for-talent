@@ -22,14 +22,14 @@ import { RouterView } from 'vue-router'
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+    opacity 0.24s ease,
+    transform 0.24s ease;
 }
 
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(12px);
 }
 
 @media (max-width: 960px) {
