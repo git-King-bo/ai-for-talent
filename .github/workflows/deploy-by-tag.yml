@@ -35,5 +35,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
           source: './dist/*'
-          target: '/home/admin/www/ai-for-talent' # 你的实际部署目录
+          target: '/home/admin/www/ai-for-talent/dist' # 你的实际部署目录
           strip_components: 1
