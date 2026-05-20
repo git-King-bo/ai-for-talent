@@ -23,5 +23,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
           source: './dist/*'
-          target: '/home/admin/www/ai-for-talent'
+          target: '/home/admin/www/ai-for-talent/dist'
           strip_components: 1
