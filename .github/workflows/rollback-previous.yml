@@ -1,0 +1,63 @@
+name: 一键回退到上一个 Tag
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rollback-previous:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取所有 Tag 信息
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 需要完整历史来获取所有 tag
+
+      - name: 获取当前部署版本（可选，用于记录）
+        id: current_version
+        run: |
+          # 假设当前部署版本记录在某个文件中（可选项）
+          # 如果没有记录，则从服务器拉取？此步骤简化，直接获取上一个 tag
+          echo "skip"
+
+      - name: 获取上一个 Tag
+        id: previous_tag
+        run: |
+          # 按版本排序取倒数第二个 tag（假设 tag 按时间顺序）
+          # 注意：需要确保 tag 遵循语义化版本或按时间排序
+          PREVIOUS_TAG=$(git tag --sort=-creatordate | sed -n '2p')
+          if [ -z "$PREVIOUS_TAG" ]; then
+            echo "没有找到上一个 Tag，请手动指定"
+            exit 1
+          fi
+          echo "PREVIOUS_TAG=$PREVIOUS_TAG" >> $GITHUB_OUTPUT
+          echo "将回退到: $PREVIOUS_TAG"
+
+      - name: 检出上一个 Tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.previous_tag.outputs.PREVIOUS_TAG }}
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 安装依赖并构建
+        run: |
+          npm install
+          npm run build
+
+      - name: 部署到阿里云 ECS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
+          source: './dist/*'
+          target: '/home/admin/www/ai-for-talent'
+          strip_components: 1
+
+      - name: 发送回退完成通知（可选）
+        run: |
+          echo "已回退到 ${{ steps.previous_tag.outputs.PREVIOUS_TAG }}"

@@ -2,7 +2,7 @@ name: 自动部署到阿里云 ECS
 
 on:
   push:
-    branches: ['main']
+    branches: ['dev']
 
 jobs:
   build-and-deploy:

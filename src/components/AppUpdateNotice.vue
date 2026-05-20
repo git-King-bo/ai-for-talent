@@ -9,7 +9,6 @@ let intervalId = null
 
 const {
   needRefresh,
-  updateServiceWorker,
 } = useRegisterSW({
   onRegisteredSW(_swUrl, registration) {
     if (!registration || intervalId) {
@@ -43,10 +42,6 @@ onBeforeUnmount(() => {
 function closeNotice() {
   dismissed.value = true
 }
-
-async function refreshApp() {
-  await updateServiceWorker(true)
-}
 </script>
 
 <template>
@@ -55,14 +50,11 @@ async function refreshApp() {
       <div class="update-notice__badge">New</div>
       <div class="update-notice__content">
         <strong>发现新的版本</strong>
-        <p>检测到应用已发版，是否立即更新到最新内容？</p>
+        <p>检测到应用已发版，请在方便时手动刷新页面，以更新到最新版本。</p>
       </div>
       <div class="update-notice__actions">
         <button type="button" class="update-notice__button update-notice__button--ghost" @click="closeNotice">
-          稍后
-        </button>
-        <button type="button" class="update-notice__button update-notice__button--primary" @click="refreshApp">
-          立即更新
+          知道了
         </button>
       </div>
     </aside>
@@ -148,16 +140,6 @@ async function refreshApp() {
 
 .update-notice__button--ghost:hover {
   background: rgba(255, 255, 255, 0.12);
-}
-
-.update-notice__button--primary {
-  background: linear-gradient(135deg, #4ade80, #2fb6ff);
-  color: #041120;
-  box-shadow: 0 12px 24px rgba(47, 182, 255, 0.24);
-}
-
-.update-notice__button--primary:hover {
-  box-shadow: 0 16px 26px rgba(47, 182, 255, 0.3);
 }
 
 .update-notice-enter-active,
