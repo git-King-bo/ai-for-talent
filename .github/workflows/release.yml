@@ -19,7 +19,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: '8.145.55.10'
-          username: 'admin'
+          username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: './dist/*'
           target: '/home/admin/www/ai-for-talent'
