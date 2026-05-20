@@ -72,7 +72,7 @@ function handleContinue() {
           class="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl"
           style="font-family: Georgia, 'Times New Roman', serif"
         >
-          你是谁- v2?
+          你是谁- v3?
         </h1>
         <p class="mx-auto mt-2 max-w-lg text-xs leading-6 text-slate-300/82 sm:mt-3 sm:text-sm">
           选择你的当前身份，我们会给你更贴合的匹配路径与体验入口。
