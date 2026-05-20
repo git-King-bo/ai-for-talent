@@ -1,4 +1,5 @@
 <script setup>
+import AppUpdateNotice from '@/components/AppUpdateNotice.vue'
 import StarfieldBackground from '@/components/StarfieldBackground.vue'
 import TalentBg from '@/components/TalentBg.vue'
 import { RouterView } from 'vue-router'
@@ -8,6 +9,7 @@ import { RouterView } from 'vue-router'
   <div class="app-shell">
     <TalentBg />
     <!-- <StarfieldBackground></StarfieldBackground> -->
+    <AppUpdateNotice />
     <div class="app-shell__content">
       <RouterView />
     </div>
