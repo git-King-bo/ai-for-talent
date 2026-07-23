@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
@@ -10,7 +11,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    vue(),
+    vue(), // vueDevTools(),
     VitePWA({
       registerType: 'prompt',
       injectRegister: 'auto',
@@ -30,7 +31,11 @@ export default defineConfig({
         enabled: false,
       },
     }),
-    // vueDevTools(),
+    sentryVitePlugin({
+      org: 'e4f45f6feac8',
+      project: 'ai-for-tanlent',
+      cleanArtifacts: true,
+    }),
   ],
   resolve: {
     alias: {
@@ -40,5 +45,8 @@ export default defineConfig({
   server: {
     host: true,
     port: 8066,
+  },
+  build: {
+    sourcemap: 'hidden',
   },
 })

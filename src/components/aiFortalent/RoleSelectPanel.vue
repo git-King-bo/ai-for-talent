@@ -8,7 +8,6 @@ defineProps({
     default: false,
   },
 })
-
 const roles = [
   {
     id: 'founder',
