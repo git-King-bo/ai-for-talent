@@ -1,5 +1,5 @@
 <template>
-  <div>233</div>
+  <div>23</div>
 </template>
 <script setup>
 import { onMounted } from 'vue'
