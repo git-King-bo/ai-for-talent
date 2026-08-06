@@ -37,6 +37,3 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
-
-# Sentry Config File
-.env.sentry-build-plugin
